@@ -1,5 +1,0 @@
-[0] Config.pm:304> INFO - This is Biber 2.13
-[0] Config.pm:307> INFO - Logfile is 'temp/a.blg'
-[28] biber:315> INFO - === Fri Feb  7, 2020, 15:40:33
-[40] Biber.pm:375> INFO - Reading 'temp/a.bcf'
-[99] Utils.pm:300> WARN - No data sources defined!

@@ -2,7 +2,6 @@
 
 import os
 
-os.system('rm -rf temp')
 f = open('Makefile', 'w')
 seq = '''a.pdf:
 \tlatexmk -xelatex -pvc- -shell-escape a.tex
@@ -12,3 +11,4 @@ f.close()
 os.system('python ../AutoTrans.py a.txt')
 os.system('make')
 os.system('cp temp/a.pdf .')
+os.system('rm -rf temp')
