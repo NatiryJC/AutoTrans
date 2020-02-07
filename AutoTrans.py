@@ -35,8 +35,6 @@ if __name__ == '__main__':
         f = open(filename, "r")
         strings = f.read()
         f.close()
-        # strings = strings.replace('\u0012', ' ')
-        # strings = strings.replace('\u0013', ' ')
         strings = strings.split(".\n")
         Num = len(strings)-1
         count = 0
@@ -49,7 +47,7 @@ if __name__ == '__main__':
             count += 1
             trans4latex += latex.add_body(seq)
             print(colored(count_Num(count, Num)+seq, 'green'))
-            translation = Translator.localTrans(seq)
+            translation = Translator.YoudaoTrans(seq)
             trans4latex += latex.add_body(translation)
             print(colored(count_Num(count, Num)+translation, 'blue'))
         f = open(filename.split(".")[0]+".tex", "w")

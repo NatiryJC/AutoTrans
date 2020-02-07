@@ -1,0 +1,16 @@
+#1 [ Translator ]  TODO
+    Frequent submissions (over 1000 times per hour), IP will be blocked.
+
+#2 [ LaTeX ]  [ close ]
+    Need to handle special control characters.
+    Remove:
+        \u0010
+        \u0011
+        \u0012
+        \u0013
+    Transform:
+        % -> \%
+        # -> \#
+
+#3 [ Parser ]  TODO
+    Identify the structure of the document.

@@ -1,7 +1,19 @@
 #!/usr/bin/env python3
 
+
 class latex():
+
     def add_body(seq):
+        def handle_special_char(seq):
+            seq = seq.replace("\u0010", "")
+            seq = seq.replace("\u0011", "")
+            seq = seq.replace("\u0012", "")
+            seq = seq.replace("\u0013", "")
+
+            seq = seq.replace(r"#", r"\#")
+            seq = seq.replace(r"%", r"\%")
+            return seq
+        seq = handle_special_char(seq)
         body = "\n"+seq+"\n"
         return body
 

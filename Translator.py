@@ -25,8 +25,7 @@ def YoudaoTrans(seq):
             'type': 'AUTO',
             'i': seq
             }
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"}
-    r = requests.get(url, data=data, headers=headers)
+    r = requests.get(url, data)
     results = r.json()['translateResult'][0]
     result = ''
     for item in results:
