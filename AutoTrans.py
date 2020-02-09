@@ -47,7 +47,7 @@ if __name__ == '__main__':
             count += 1
             trans4latex += latex.add_body(seq)
             print(colored(count_Num(count, Num)+seq, 'green'))
-            translation = Translator.YoudaoTrans(seq)
+            translation = Translator.GoogleTrans(seq)
             trans4latex += latex.add_body(translation)
             print(colored(count_Num(count, Num)+translation, 'blue'))
         f = open(filename.split(".")[0]+".tex", "w")
