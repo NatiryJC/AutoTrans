@@ -13,9 +13,9 @@ class proxy(Thread):
 
     def run(self):
         print("Start :: "+self.name)
-        proxy.proxy_get(self.page, self.name)
+        proxy.get(self.page)
 
-    def proxy_get(page, name):
+    def get(page):
         '''get proxy address'''
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'}
         # url = 'http://www.kuaidaili.com/free/inha/'
@@ -35,27 +35,55 @@ class proxy(Thread):
                         "http": "http://"+proxy_pre,
                         "https": "https://"+proxy_pre
                         }
-                if proxy.proxy_fetch(name, proxies_pre):
+                if proxy.fetch(proxies_pre):
                     with open(".proxy", "a") as f:
                         f.write(proxy_pre+"\n")
         except Exception:
             pass
 
-    def proxy_fetch(name, proxies):
+    def fetch(proxies=None):
         '''proxy validity verification'''
         try:
             requests.get('http://httpbin.org/get', proxies=proxies, timeout=1)
-            print(name, "True")
+            print("True")
             return True
         except Exception:
-            print(name, "False")
+            print("False")
             return False
 
+    def update():
+        with open(".proxy", "w") as f:
+            f.write("")
+        threads = []
+        for page in range(1, 3):
+            threads.append(proxy("Getting in page "+str(page), page))
+        for page in range(1, 3):
+            threads[page-1].start()
+        for page in range(1, 3):
+            threads[page-1].join()
 
-with open(".proxy", "w") as f:
-    f.write("")
-threads = []
-for page in range(1, 5):
-    threads.append(proxy("Getting in page "+str(page), page))
-for page in range(1, 5):
-    threads[page-1].start()
+    def getinfile():
+        with open(".proxy", "r") as f:
+            items = f.read().split("\n")
+        for proxies in items:
+            proxies = {
+                    "http": "http://"+proxies,
+                    "https": "https://"+proxies
+                    }
+            if proxy.fetch(proxies):
+                return proxies
+
+    def use(is_proxy):
+        if is_proxy:
+            proxies = proxy.getinfile()
+            if proxies is None:
+                print(":: Start Update Proxy [Y/n]", end="")
+                flag = input()
+                if flag == 'n':
+                    proxies = None
+                else:
+                    proxy.update()
+                    proxies = proxy.getinfile()
+        else:
+            proxies = None
+        return proxies

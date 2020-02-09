@@ -2,6 +2,7 @@
 
 from base import Translator
 from base.LaTeX import latex
+from base.Proxy import proxy
 from sys import argv
 # TODO :
 #     argv    -t --translator     specify the translator
@@ -9,6 +10,10 @@ from sys import argv
 #             --without_color     without color
 #             -o --output         specify output file
 filenames = argv[1:]
+is_proxy = True
+
+
+
 
 
 def colored(content, color_item):
@@ -29,6 +34,7 @@ def count_Num(count, Num):
 
 
 if __name__ == '__main__':
+    proxies = proxy.use(is_proxy)
     print(colored(":: Start Translate", 'red'))
     for filename in filenames:
         print(colored("->"+filename+'\n', 'fuchsia'))
@@ -47,7 +53,7 @@ if __name__ == '__main__':
             count += 1
             trans4latex += latex.add_body(content)
             print(colored(count_Num(count, Num)+content, 'green'))
-            translation = Translator.GoogleTrans(content)
+            translation = Translator.GoogleTrans(content, proxies)
             trans4latex += latex.add_body(translation)
             print(colored(count_Num(count, Num)+translation, 'blue'))
         f = open(filename.split(".")[0]+".tex", "w")
