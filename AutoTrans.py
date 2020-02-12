@@ -1,19 +1,36 @@
 #!/usr/bin/env python3
 
-from base import Translator
-from base.LaTeX import latex
-from base.Proxy import proxy
-from sys import argv
-# TODO :
-#     argv    -t --translator     specify the translator
-#             -f --files          save to file(s)
-#             --without_color     without color
-#             -o --output         specify output file
-filenames = argv[1:]
-is_proxy = True
-
-
-
+from base import Load, Parser, Translator, Export, Proxy
+import argparse
+options_parser = argparse.ArgumentParser("AutoTrans")
+options_parser.add_argument(
+        'filename',
+        nargs="+",
+        help="the file(s) need to be translated"
+        )
+options_parser.add_argument(
+        '--use-proxy',
+        required=False,
+        action="store_true",
+        help='use proxy'
+        )
+options_parser.add_argument(
+        '-t', '--translator',
+        required=False,
+        default='google',
+        help='Specify the Translator(local, youdao, baidu or google)'
+        )
+options = options_parser.parse_args()
+is_proxy = options.use_proxy
+filenames = options.filename
+translator = options.translator
+trans = {
+        "google": Translator.GoogleTrans,
+        "baidu": Translator.BaiduTrans,
+        "youdao": Translator.YoudaoTrans,
+        "local": Translator.localTrans,
+        }
+translator = trans[translator]
 
 
 def colored(content, color_item):
@@ -28,36 +45,22 @@ def colored(content, color_item):
     return tag[color_item]+content+tag['end']
 
 
-def count_Num(count, Num):
-    '''print : show progress'''
-    return '('+str(count)+'/'+str(Num)+') '
+def translate(sentence):
+    result = []
+    for line in sentence:
+        result.append(line+" "+translator(line))
+    return result
 
 
 if __name__ == '__main__':
-    proxies = proxy.use(is_proxy)
-    print(colored(":: Start Translate", 'red'))
+    proxies = Proxy.proxy.run(is_proxy)
+    print(colored(":: Translating ...", 'red'))
     for filename in filenames:
-        print(colored("->"+filename+'\n', 'fuchsia'))
-        f = open(filename, "r")
-        strings = f.read()
-        f.close()
-        strings = strings.split(".\n")
-        Num = len(strings)-1
-        count = 0
-        trans4latex = ''
-        for content in strings:
-            if content == '':
-                continue
-            else:
-                content = content.replace('\n', ' ')+'.'
-            count += 1
-            trans4latex += latex.add_body(content)
-            print(colored(count_Num(count, Num)+content, 'green'))
-            translation = Translator.GoogleTrans(content, proxies)
-            trans4latex += latex.add_body(translation)
-            print(colored(count_Num(count, Num)+translation, 'blue'))
-        f = open(filename.split(".")[0]+".tex", "w")
-        f.write(latex.all(trans4latex))
-        f.close()
-    print(colored(":: Translate Finish", 'red'))
-    # print(latex.all(trans4latex))
+        print(colored("\t\u2192 Load %s ..." % filename, 'fuchsia'))
+        sentence = Load.read.txt(filename)
+        print(colored("\t=> Parsering and getting body ...", 'green'))
+        body = Parser.parser(sentence)
+        print(colored("\t=> Translating ...", 'green'))
+        translation = translate(body)
+        print(colored("\t=> Export into %s.md ..." % filename.split(".")[0], 'green'))
+        Export.markdown(translation, filename)

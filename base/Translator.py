@@ -2,20 +2,20 @@
 '''Translate Engines'''
 
 
-def localTrans(content):
+def localTrans(sentence):
     '''local Translator Engines'''
     # MAX ALLOWED QUERY : 500 CHARS
     # NEED TO SPLIT PARAGRAPH INTO SENTENCES
     from translate import Translator
     Engine = Translator(to_lang='chinese')
-    content = content.split('.')
+    sentence = sentence.split('.')
     result = ''
-    for item in content:
+    for item in sentence:
         result += Engine.translate(item+'.')
     return result
 
 
-def YoudaoTrans(content):
+def YoudaoTrans(sentence):
     '''Youdao Translate API'''
     # MAX FREQUENCY LIMIT: 1000 PER HOUR
     import requests
@@ -23,7 +23,7 @@ def YoudaoTrans(content):
     data = {
             'doctype': 'json',
             'type': 'AUTO',
-            'i': content
+            'i': sentence
             }
     r = requests.get(url, data)
     results = r.json()['translateResult'][0]
@@ -33,7 +33,7 @@ def YoudaoTrans(content):
     return result
 
 
-def BaiduTrans(content):
+def BaiduTrans(sentence):
     '''Baidu Translate API'''
     import requests
     url = "http://fanyi.baidu.com/v2transapi"
@@ -41,13 +41,13 @@ def BaiduTrans(content):
             'form': 'en',
             'to': 'zh',
             'transtype': 'translang',
-            'query': content
+            'query': sentence
             }
     requests.get(url, params=data)
     pass
 
 
-def GoogleTrans(content, proxies=None):
+def GoogleTrans(sentence, proxies=None):
     '''Google Translate API'''
     import execjs
     from urllib.request import quote
@@ -98,13 +98,21 @@ def GoogleTrans(content, proxies=None):
         def getTk(self, text):
             return self.ctx.call("TL", text)
 
+    def post_processing(result):
+        null = " "
+        false = False
+        true = True
+        result = eval(result)[0]
+        translation = ""
+        for i in [i-1 for i in range(1, len(result))]:
+            translation += result[i][0]
+        return translation
+
     js = Py4Js()
-    tk = js.getTk(content)
-    content = quote(content)
+    tk = js.getTk(sentence)
+    sentence = quote(sentence)
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'}
-    url = "https://translate.google.cn/translate_a/single?client=webapp&sl=en&tl=zh-CN&hl=EN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&clearbtn=1&otf=1&pc=1&srcrom=0&ssel=0&tsel=0&kc=2&tk=%s&q=%s" % (tk, content)
+    url = "https://translate.google.cn/translate_a/single?client=webapp&sl=en&tl=zh-CN&hl=EN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&clearbtn=1&otf=1&pc=1&srcrom=0&ssel=0&tsel=0&kc=2&tk=%s&q=%s" % (tk, sentence)
     result = requests.get(url=url, headers=headers, proxies=proxies).text
-    end = result.find("\",")
-    if end > 4:
-        result = result[4:end]
-        return result
+    result = post_processing(result)
+    return result
