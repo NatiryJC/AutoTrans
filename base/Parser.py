@@ -2,6 +2,9 @@
 import re
 
 
+# For black
+black_line = re.compile(r"^\s*$")
+
 # For Document Structure
 abstract_start = re.compile(r"^Abstract")
 foreword_start = re.compile(r"^Foreword")
@@ -15,33 +18,10 @@ title_2 = re.compile(r"^\d\.\d\s.*")
 title_3 = re.compile(r"^\d\.\d\.\d\s.*")
 title_4 = re.compile(r"^\d\.\d\.\d\.\d\s.*")
 title_5 = re.compile(r"^\d\.\d\.\d\.\d\.\d\s.*")
-para_start = re.compile(r"^\s.*")
+para_start = re.compile(r"^\s\s.*")
 
 # For References
 references_count = re.compile(r"^\s*(\d*).")
-
-
-def readtxt():
-    def handle_special_char(sentence):
-        sentence = sentence.replace("\u0010", "")
-        sentence = sentence.replace("\u0011", "")
-        sentence = sentence.replace("\u0012", "")
-        sentence = sentence.replace("\u0013", "")
-
-        sentence = sentence.replace(r"#", r"\#")
-        sentence = sentence.replace(r"%", r"\%")
-        return sentence
-
-    sentence = []
-    with open("b.txt", "r") as f:
-        while True:
-            line = f.readline()
-            line = handle_special_char(line)
-            if not line:
-                break
-            line = line.strip('\n')
-            sentence.append(line)
-    return sentence
 
 
 def parser(sentence):
@@ -63,7 +43,6 @@ def parser(sentence):
             body_flag = body_start.search(line)
             references_flag = references_start.search(line)
             if abstract_flag is not None:
-                print(abstract_flag)
                 is_abstract = True
                 is_foreword = False
                 is_contents = False
@@ -107,9 +86,12 @@ def parser(sentence):
 
     def handle_abstract(sentence):
         try:
+            abstract_text = ""
             print(r"\abstract{"+sentence[0]+"}")
             for line in sentence[1:]:
-                print(" "+line, end="")
+                print(line, end=" ")
+                abstract_text += line+" "
+            return abstract_text
         except IndexError:
             pass
             # print("Haven't Abstract")
@@ -130,116 +112,46 @@ def parser(sentence):
                 print(line, end="")
 
     def handle_body(sentence):
+        body = []
+        need_white = 0
         for line in sentence:
-            title_1_flag = title_1.search(line)
-            title_2_flag = title_2.search(line)
-            title_3_flag = title_3.search(line)
-            title_4_flag = title_4.search(line)
-            title_5_flag = title_5.search(line)
+            # is_black_line = black_line.search(line)
+            # if need_white and is_black_line is not None:
+            if need_white:
+                line = "  "+line
+            need_white = 0
+            title_1_flag = "".join(title_1.findall(line))
+            title_2_flag = "".join(title_2.findall(line))
+            title_3_flag = "".join(title_3.findall(line))
+            title_4_flag = "".join(title_4.findall(line))
+            title_5_flag = "".join(title_5.findall(line))
             para_start_flag = para_start.search(line)
-            if title_1_flag is not None:
-                print("\n")
-                # print('title 1:')
-                line = line.split(". ")[-1]
-                print(r"\section{"+line+"}")
-                print()
+            if title_1_flag != "":
+                need_white = 1
+                body.append(title_1_flag)
                 continue
-            if title_2_flag is not None:
-                print("\n")
-                # print('title 2:')
-                line = line.split(". ")[-1]
-                print(r"\subsection{"+line+"}")
-                print()
+            if title_2_flag != "":
+                need_white = 1
+                body.append(title_2_flag)
                 continue
-            if title_3_flag is not None:
-                print("\n")
-                # print('title 3:')
-                line = line.split(". ")[-1]
-                print(r"\subsubsection{"+line+"}")
-                print()
+            if title_3_flag != "":
+                need_white = 1
+                body.append(title_3_flag)
                 continue
-            if title_4_flag is not None:
-                print("\n")
-                # print('title 4:')
-                line = line.split(". ")[-1]
-                print(line)
-                print()
+            if title_4_flag != "":
+                need_white = 1
+                body.append(title_4_flag)
                 continue
-            if title_5_flag is not None:
-                print("\n")
-                # print('title 5:')
-                line = line.split(". ")[-1]
-                print(line)
-                print()
+            if title_5_flag != "":
+                need_white = 1
+                body.append(title_5_flag)
                 continue
             if para_start_flag is not None:
-                print("\n")
-                # print('para: ')
-                print(line, end='')
+                body.append(line+" ")
                 continue
             else:
-                print(' '+line, end='')
+                body[-1] += line+" "
+        return body
 
     abstract, foreword, contents, body, references = split(sentence)
-    # handle_abstract(abstract)
-    handle_body(body)
-    # handle_reference(references)
-
-
-start = r'''\documentclass[11pt]{article}
-\title{\textbf{Auto Translate}}
-\author{AutoTrans}
-\date{}
-
-\addtolength{\topmargin}{-3cm}
-\addtolength{\textheight}{3cm}
-
-\usepackage{fontspec}
-\usepackage{xeCJK}
-\usepackage{CJKnumb}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{mathtools}
-\usepackage{pdfpages}
-\usepackage{xstring}
-\usepackage{emptypage}
-\usepackage[many]{tcolorbox}
-\usepackage{setspace}
-\usepackage{biblatex}
-\usepackage{tikz}
-\usepackage{pygmentex}
-\usepackage{paralist}
-\usetikzlibrary{shapes.symbols}
-%\usepackage[iso, english]{isodate}
-\usepackage{datetime}
-
-\renewcommand{\today}{\number\year 年 \number\month 月 \number\day 日}
-
-%\setsansfont{TeX Gyre Heros}
-\setsansfont{TSCu_Times}
-\setCJKmainfont{FandolSong-Regular.otf}
-\setCJKsansfont{FandolHei-Regular.otf}
-\setCJKmonofont{FandolHei-Regular.otf}
-\setCJKfamilyfont{kai}{FandolKai-Regular.otf}
-\setCJKfamilyfont{song}{FandolSong-Regular.otf}
-\setCJKfamilyfont{fangsong}{FandolFang-Regular.otf}
-\setCJKfamilyfont{hei}{FandolHei-Regular.otf}
-\setCJKfamilyfont{hei2}{Noto Sans CJK SC}
-\defaultfontfeatures{Ligatures=TeX}
-\XeTeXlinebreaklocale "zh"
-\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
-\newcommand\kaiti{\CJKfamily{kai}}
-\newcommand\songti{\CJKfamily{song}}
-\newcommand\heiti{\CJKfamily{hei}}
-\newcommand\thmheiti{\CJKfamily{hei2}}
-\newcommand\fangsong{\CJKfamily{fangsong}}
-\renewcommand{\em}{\bfseries\CJKfamily{emfont}}
-\begin{document}
-'''
-end = r'''
-\end{document}
-'''
-print(start)
-sentence = readtxt()
-parser(sentence)
-print(end)
+    return handle_body(body)
