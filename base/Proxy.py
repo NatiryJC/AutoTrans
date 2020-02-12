@@ -2,20 +2,10 @@
 
 import requests
 import re
-from threading import Thread
 
 
-class proxy(Thread):
-    def __init__(self, name, page):
-        Thread.__init__(self)
-        self.name = name
-        self.page = page
-
-    def run(self):
-        print("Start :: "+self.name)
-        proxy.get(self.page)
-
-    def get(page):
+class proxy():
+    def online(page):
         '''get proxy address'''
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'}
         # url = 'http://www.kuaidaili.com/free/inha/'
@@ -26,64 +16,72 @@ class proxy(Thread):
         pattern = re.compile(
                 r'''<td>([0-9]*.[0-9]*.[0-9]*.[0-9]*)</td>\s*<td>([0-9]*)</td>\n'''
                 )
+        results = []
         try:
             html = requests.get(url+str(page)+'/', headers=headers).text
-            results = pattern.findall(html)
-            for item in results:
-                proxy_pre = item[0]+':'+item[1]
-                proxies_pre = {
-                        "http": "http://"+proxy_pre,
-                        "https": "https://"+proxy_pre
-                        }
-                if proxy.fetch(proxies_pre):
-                    with open(".proxy", "a") as f:
-                        f.write(proxy_pre+"\n")
+            proxies = pattern.findall(html)
+            for item in proxies:
+                results.append(item[0]+':'+item[1])
+            return results
         except Exception:
-            pass
+            return results
 
     def fetch(proxies=None):
         '''proxy validity verification'''
         try:
             requests.get('http://httpbin.org/get', proxies=proxies, timeout=1)
-            print("True")
             return True
         except Exception:
-            print("False")
             return False
 
+    def merge(item):
+        return {
+                "http": "http://"+item,
+                "https": "https://"+item
+                }
+
     def update():
+        proxies = []
+        results = ""
+        for page in range(1, 2):
+            proxies += proxy.online(page)
+        for i in range(0, len(proxies)):
+            print("\r(%d/%d)" % (i, len(proxies)), end="")
+            if proxy.fetch(proxy.merge(proxies[i])):
+                print("\tavailable", end="")
+                results += str(proxies[i])+"\n"
+            else:
+                print("\tunavailable", end="")
         with open(".proxy", "w") as f:
-            f.write("")
-        threads = []
-        for page in range(1, 3):
-            threads.append(proxy("Getting in page "+str(page), page))
-        for page in range(1, 3):
-            threads[page-1].start()
-        for page in range(1, 3):
-            threads[page-1].join()
+            f.write(results)
 
-    def getinfile():
+    def local():
         with open(".proxy", "r") as f:
-            items = f.read().split("\n")
-        for proxies in items:
-            proxies = {
-                    "http": "http://"+proxies,
-                    "https": "https://"+proxies
-                    }
-            if proxy.fetch(proxies):
-                return proxies
+            proxies = f.read().splitlines()
+        for i in range(0, len(proxies)):
+            print("\rTry # %d:" % i, end="")
+            if proxy.fetch(proxy.merge(proxies[i])):
+                print("\tavailable", end="")
+                return proxies[i]
+            else:
+                print("\tunavailable", end="")
 
-    def use(is_proxy):
+    def run(is_proxy):
         if is_proxy:
-            proxies = proxy.getinfile()
+            print(":: Try to get proxy ...")
+            proxies = proxy.local()
+            print()
             if proxies is None:
-                print(":: Start Update Proxy [Y/n]", end="")
-                flag = input()
+                flag = input(":: Start Update Proxy [Y/n]")
                 if flag == 'n':
+                    print(":: No proxy")
                     proxies = None
                 else:
                     proxy.update()
-                    proxies = proxy.getinfile()
+                    print(":: Try to get proxy again ...")
+                    proxies = proxy.local()
+                    print()
         else:
+            print(":: No proxy")
             proxies = None
         return proxies
