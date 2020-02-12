@@ -3,22 +3,22 @@
 
 class latex():
 
-    def add_body(seq):
-        def handle_special_char(seq):
-            seq = seq.replace("\u0010", "")
-            seq = seq.replace("\u0011", "")
-            seq = seq.replace("\u0012", "")
-            seq = seq.replace("\u0013", "")
+    def add_body(sentence):
+        def handle_special_char(sentence):
+            sentence = sentence.replace("\u0010", "")
+            sentence = sentence.replace("\u0011", "")
+            sentence = sentence.replace("\u0012", "")
+            sentence = sentence.replace("\u0013", "")
 
-            seq = seq.replace(r"#", r"\#")
-            seq = seq.replace(r"%", r"\%")
-            return seq
-        seq = handle_special_char(seq)
-        body = "\n"+seq+"\n"
+            sentence = sentence.replace(r"#", r"\#")
+            sentence = sentence.replace(r"%", r"\%")
+            return sentence
+        sentence = handle_special_char(sentence)
+        body = "\n"+sentence+"\n"
         return body
 
-    def all(seq):
-        body = seq
+    def all(sentence):
+        body = sentence
         return start+body+end
 
 

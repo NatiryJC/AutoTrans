@@ -5,7 +5,7 @@ import re
 from threading import Thread
 
 
-class proxy(Thread):
+class Proxy(Thread):
     def __init__(self, name, page):
         Thread.__init__(self)
         self.name = name
@@ -13,7 +13,7 @@ class proxy(Thread):
 
     def run(self):
         print("Start :: "+self.name)
-        proxy.get(self.page)
+        Proxy.get(self.page)
 
     def get(page):
         '''get proxy address'''
@@ -35,7 +35,7 @@ class proxy(Thread):
                         "http": "http://"+proxy_pre,
                         "https": "https://"+proxy_pre
                         }
-                if proxy.fetch(proxies_pre):
+                if Proxy.fetch(proxies_pre):
                     with open(".proxy", "a") as f:
                         f.write(proxy_pre+"\n")
         except Exception:
@@ -45,10 +45,8 @@ class proxy(Thread):
         '''proxy validity verification'''
         try:
             requests.get('http://httpbin.org/get', proxies=proxies, timeout=1)
-            print("True")
             return True
         except Exception:
-            print("False")
             return False
 
     def update():
@@ -56,7 +54,7 @@ class proxy(Thread):
             f.write("")
         threads = []
         for page in range(1, 3):
-            threads.append(proxy("Getting in page "+str(page), page))
+            threads.append(Proxy("Getting in page "+str(page), page))
         for page in range(1, 3):
             threads[page-1].start()
         for page in range(1, 3):
@@ -70,20 +68,19 @@ class proxy(Thread):
                     "http": "http://"+proxies,
                     "https": "https://"+proxies
                     }
-            if proxy.fetch(proxies):
+            if Proxy.fetch(proxies):
                 return proxies
 
     def use(is_proxy):
         if is_proxy:
-            proxies = proxy.getinfile()
+            proxies = Proxy.getinfile()
             if proxies is None:
-                print(":: Start Update Proxy [Y/n]", end="")
-                flag = input()
+                flag = input(":: Start Update Proxy [Y/n]")
                 if flag == 'n':
                     proxies = None
                 else:
-                    proxy.update()
-                    proxies = proxy.getinfile()
+                    Proxy.update()
+                    proxies = Proxy.getinfile()
         else:
             proxies = None
         return proxies

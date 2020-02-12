@@ -21,7 +21,6 @@ of equilibrium via mechanical regularization. Another route is to fully merge DV
 numerical simulations via integrated approaches. Different examples will illustrate how these var-
 ious integration steps can be tailored and what are the current challenges associated with various
 approaches.
-DVC: Achievements and Challenges                                                                                      3
 Contents
 1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  3
 2 Three-dimensional imaging of unloaded and loaded materials . . . . . . . . . . . . . . . . . . . . . . .            9
@@ -48,7 +47,6 @@ Contents
   5.5  Volume data / duration of acquisition . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .       90
   5.6  Projection-based DVC: fast 4D kinematic measurement . . . . . . . . . . . . . . . . . . . . . . .             92
 6 Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 100
-4                                                                                          A. Buljac et al.
 1 Introduction
 Computed (x-ray) tomography (CT), magnetic resonance imaging (MRI), optical coherence to-
 mography (OCT), positron emission tomography (PET), single photon emission computed to-
@@ -74,7 +72,6 @@ devices [85, 12, 56]. Mechanical experiments coupled with x-ray tomography began
 servations of crack openings in aluminum alloy [85]. Other tests coupled with in-situ tomographic
 observations were developed over the years [26]. Significant progress was made in the design of
 new testing setups and more importantly on the understanding of various degradation mechanisms
-DVC: Achievements and Challenges                                                                           5
 that could only be revealed thanks to observations in the bulk of materials [56, 26]. Depending
 on the imaging modality and the studied material, the loading device had to be adapted to the
 experimental environment [14, 164, 72].
@@ -100,7 +97,6 @@ for (in)validation purposes [201, 21].
     Localized phenomena are situations in which full-field measurements make a (huge) differ-
 ence (e.g., strain localization [127, 1, 214, 49] and cracks [198, 231, 94]). This is particularly true
 when kinematic measurements can be performed nondestructively in the material bulk. Very het-
-6                                                                                    A. Buljac et al.
 erogeneous strain fields were measured by global DVC in a compression test on polypropylene
 solid foam [197]. When analyzing compressed stone wool, it was shown that the material density
 was responsible for local heterogeneities in strains, and that correlations existed between local
@@ -126,7 +122,6 @@ challenging since the graphite nodules interact with short cracks.
 analyses [69]. Force chains in Mason sand was evaluated by considering the minor eigen strains
 evaluated via DVC measurements [103]. The analysis of multiple debond cracks was shown to
 be possible in a tensile test on a propellant-like material thanks to global DVC by using the
-DVC: Achievements and Challenges                                                                    7
 correlation residuals [95]. The same mechanism was found in polymer bonded sugar in uniaxial
 compression [104]. The gray level residuals were also used to detect matrix/nodule debonding in
 cast iron [93, 219, 29]. Maximum eigen strain fields enabled multiple microcracking to be quanti-
@@ -151,7 +146,6 @@ of measurement uncertainties [156], which are partly due to the missing spatial 
 reduced resolution of laminographic scans along the rotation axis [238]. However, it could still
 be used to analyze the flat-to-slant transition of ductile tearing of aluminum alloys for low stress
 triaxialities with global DVC [156, 158, 30] and regularized DVC [214, 157].
-8                                                                                     A. Buljac et al.
     Registration of medical Magnetic Resonance images has been carried out for a long time for
 diagnosis and treatment purposes (e.g., see Refs. [228, 209, 141, 102, 199, 195]). Conversely, there
 are very few results of in-situ mechanical tests imaged via MRI or μMRI. Global DVC was applied
@@ -177,7 +171,6 @@ cornea [72].
     This non exhaustive literature review shows that many applications have been made possible
 thanks to the use of 3D imaging techniques combined with early ex-situ and now more frequently
 in-situ mechanical tests. DVC is becoming a tool of choice to quantify various deformation and
-DVC: Achievements and Challenges                                                                         9
 failure mechanisms. Gradually experimentally measured displacement fields are being compared
 with 3D numerical simulations for validation and identification purposes. To further illustrate the
 increased interest in DVC analyses, Figure 1 shows the yearly number of citations counted by the
@@ -193,7 +186,6 @@ two decades. They are summarized and illustrated with examples. In order not to 
 existing review on local approaches [11], more emphasis is put on global approaches. One key
 aspect of DVC analyses is their uncertainty quantification, which is partly related to the way
 3D images are obtained. Last, some research directions are sketched to address questions and
-10                                                                                     A. Buljac et al.
 limitations of current implementations of DVC algorithms and their subsequent use for modeling
 and simulation purposes.
 2 Three-dimensional imaging of unloaded and loaded materials
@@ -216,7 +208,6 @@ is of the order of 1 to 10 μm per voxel for micro-CT. Therefore x-ray microtomo
 referred to as x-ray microscopy [55, 177].
     There are numerous sources of artifacts in computed tomography [48]. Some of them lead
 to gray level variations (e.g., beam hardening with polychromatic x-ray sources), specific curves
-DVC: Achievements and Challenges                                                                  11
 (e.g., streak or ring artifacts) and some are associated with spurious motions (e.g., source motion
 for lab systems, sample motion, wobbling) that degrade the reconstruction qualities. Not all of
 them are impacting DVC analyses. However, careful analyses should be performed to evaluate
@@ -239,7 +230,6 @@ used in DVC analyses is less than 0.8 % for the AA2139 grade (Figure 2(a)), and 
 fraction of metallic inclusions (Figure 2(b)) for the AA2198 grade. Nodular graphite cast iron has
 different microstructural length scales where nodules appear in dark and the ferritic matrix in
 bright levels (Figure 2(c)).
-12                                                                                                 A. Buljac et al.
              (a) AA2139                           (b) AA2198                               (c) GJS-400
 Fig. 2 Mid-thickness section in 3D reconstructed volumes of two different aluminum alloys and one cast iron
 sample. The picture definition is 2040 × 2040 pixels for aluminum alloys and 1600 × 1600 for cast iron. The
@@ -256,7 +246,6 @@ data acquired by the radiation-matter interaction where scattering is weak. It c
 adapted to many types of radiations as diverse as neutrons [224, 225], muons, electrons or gamma
 radiations [24, 173, 172, 174], visible optics, THz electromagnetic radiations, magnetic fields or
 ultrasound.
-DVC: Achievements and Challenges                                                                    13
 2.1.2 Magnetic Resonance Imaging
 MRI is a noninvasive imaging technique that produces three dimensional images without the use
 of damaging radiation (e.g., x-rays). It is often used for disease detection, diagnosis, and treatment
@@ -282,7 +271,6 @@ thicknesses in clinical MRI vary from a maximum ≈ 5 mm, which is achieved usin
 imaging, to sub-mm with 3D scanning techniques. When using micro-MRI equipments, the voxel
 size can be decreased to typically 100 μm [14] but require extremely intense magnetic fields. The
 acquisition process associated with MRI is generally much longer than with (x-ray) tomography.
-14                                                                                            A. Buljac et al.
 This is even longer when micro-MRI is performed (e.g., 9 h for 512 × 256 × 256-voxel images
 with an isotropic voxel size of 78 μm, see Figure 3(a)). The trabecular network of cancellous bone
 revealed by micro-MRI was shown to be suitable for correlation purposes.
@@ -299,7 +287,6 @@ transparent (e.g., biological) materials at micrometer resolutions, i.e., simila
 microscopy. One of the most remarkable applications concerns ophthalmology. OCT is based on
 interferometry in so-called weakly coherent (i.e., polychromatic or white) light. There are different
 variants of OCT, all of them typically use Michelson interferometers [182]. Full-field OCT utilizes
-DVC: Achievements and Challenges                                                                     15
 a Michelson interferometer with microscope lenses placed in both arms [13, 54]. The length of the
 reference arm determines the inspected sample depth with equal optical length, and the amplitude
 of the coherent signal in both arms at a given location indicates the level of (single) backscattering.
@@ -324,7 +311,6 @@ Yet, their shape is not enough to determine their nature. Elastography may help 
 possible carcinogenic character. One way to have access to such information is from imaging the
 same tissue under slightly different mechanical loadings. DVC is a technique of choice to provide
 the relative strains within the medium, and hence the sought elastic contrast [164].
-16                                                                                                A. Buljac et al.
                         (a)                                                       (b)
 Fig. 4 Section view through full-field OCT for two biological samples. The top of these images is the observation
 side. The width of these images is about 1 mm. (a) Porcine eye cornea revealing a lamellar collagen microstruc-
@@ -345,7 +331,6 @@ DVC was also applied to 3D images acquired with other modalities. Its feasibilit
 volumes obtained by optical slicing (or scanning) tomography [77, 78], optical rotating scanning
 tomography(ORST) [155], terahertz tomography [84], confocal microscopy [148], laser-scanning
 confocal microscopy (LSCM) [194], and ultrasonic imaging [24].
-DVC: Achievements and Challenges                                                               17
 2.2 Ex-situ and in-situ experiments
 The majority of in-situ experiments cited so far in this paper have been performed with x-ray
 imaging devices (i.e., either in synchrotron facilities or lab tomographs even including medical
@@ -369,7 +354,6 @@ the bulk of sand samples as early as in 1996.
 induced by accelerated desiccation of concrete-like material could be studied via ex-situ imaging
 even though the climatic chamber was located next to the beamline. In such cases, it is worth
 remembering that large rotations may occur because of repositioning issues [232] and consequently
-18                                                                                      A. Buljac et al.
 consistent strain descriptors may be considered even though the strain levels themselves remain
 low [101]. This observation also applies to in-situ tests [14].
     The following example is devoted to the analysis of accelerated desiccation [101]. The model
@@ -391,7 +375,6 @@ faithfully meshed with 19,494 T4 elements (Figure 5). The characteristic element
 defined as the cubic root of the average number of voxels per element, is equal to 16 voxels. The
 spatial displacement resolution, which is defined as the cubic root of the mean number of voxels
 considered for the nodal displacement measurement, is equal to 27 voxels.
-DVC: Achievements and Challenges                                                                   19
 Fig. 5 Cylindrical region of interest and corresponding mesh of T4 elements.
     A Matlab implementation was used to run the following analyses. Optimized C++ kernels [121]
 computed all the data needed to perform DVC. Binary MEX files were then generated and called
@@ -406,7 +389,6 @@ the consistency of a DVC analysis. In the present case, the registration was suc
 exact location of the cracks because displacement continuity was assumed. The only information
 left in the thresholded residuals was the cracks (Figure 6(b)). It was concluded that two damage
 mechanisms operate, namely, inclusion/matrix debonding and matrix cracking.
-20                                                                                           A. Buljac et al.
                          (a)                                                 (b)
 Fig. 6 (a) 3D rendering of the gray level residuals. (b) Thresholded residuals highlighting the two damage
 mechanisms of the cementitious matrix reinforced by glass beads
@@ -424,7 +406,6 @@ different damage mechanisms in the bulk of an Al/SiC composite [27].
 the loaded sample to be rotated under load without using the turntable of the tomograph. One
 natural solution is to have two rotational actuators that allow torsion to be applied and to per-
 form tomographic acquisitions, in addition to a longitudinal actuator (Figure 7(b)). Again, one
-DVC: Achievements and Challenges                                                                            21
 limitation is related to the minimum distance between the testing machine and the (divergent)
 x-ray source. Resolutions as low as ≈ 6 μm can be achieved in LMT’s tomograph.
                                     (a)                              (b)
@@ -437,7 +418,6 @@ rotation, the force had fluctuations less than 5 % the maximum level, which did 
 the reconstruction. The quality of the latter was identical to that observed without any applied
 load for a physical voxel size of 20 μm. One scan lasted 1 h when 1,000 radiographs were acquired
 (beam tension: 210 kV, electron current: 100 μA). Cracks are observed in the lower half-cylinder.
-22                                                                                        A. Buljac et al.
 Fig. 8 3D rendering of indentation test on granite samples
     Very recently, nanotomography was used to image mechanical tests in lab tomographs or
 synchrotron facilities. In particular, ex-situ [161] and in-situ [177] indentation tests were analyzed.
@@ -455,7 +435,6 @@ that good quality reconstructions were obtained for an in-situ tearing test when
 of one voxel was equal to 100 nm. The subsequent feasibility of DVC analyses was also proven.
 This study was crucial to understand the development of plasticity and damage in an aluminum
 alloy [28].
-DVC: Achievements and Challenges                                                                       23
 Fig. 9 Example of testing machine for in-situ tests in synchrotron laminography on beamline ID15 of ESRF.
 The zoomed section shows the testing stage. The central part of the sample is shown on the screen
     With the development of in-situ tests, one challenge is related to the fact that most of the
@@ -473,7 +452,6 @@ tomography [33, 65, 143, 178, 213]:
  – Soft routes [213] can also be devised by combining DVC analyses and image reconstruction pro-
     cedures. Under these conditions, the reference scan is performed when the sample is unloaded
     (or very modestly preloaded), and then radiographs are acquired on the fly without any inter-
-24                                                                                         A. Buljac et al.
     ruption of the test [110]. In such situations, Projection-based DVC (P-DVC) is utilized [124].
     The spirit of this technique will be presented in Section 5.6.
  – Both previous cases may be combined to enable the tests to be run even faster without
@@ -497,7 +475,6 @@ of materials may thus have required a technique that had matured within the doma
 imaging confronted with other issues than accuracy. However, it is also noteworthy that cross-
 references are scarce, so that it is also plausible that these techniques emerged independently and
 progressed with their own specificities as called for by applications.
-DVC: Achievements and Challenges                                                                   25
     It is also interesting to note that the same distinction has been made in both fields between so-
 called local and global approaches [228, 197]. Local approaches to DVC [12, 207] consist of dividing
 the region of interest into small volumes (hereafter referred to as subvolumes). The registration
@@ -522,7 +499,6 @@ motivated different variants in the past:
     dynamic range may reveal limiting.
  3. Images are noisy. Even when no motion is expected between two images of the same scene
     acquired consecutively and with the same device, i.e., u(x) = 0, f and g are different. Their
-26                                                                                       A. Buljac et al.
     difference η(x) ≡ g(x)−f (x) is at best (i.e., excluding the case of spurious changes of intensity
     or motion) the sum of the noise affecting g (often assumed to be statistically similar to that
     of f ) and −f .
@@ -546,7 +522,6 @@ why after a DVC analysis, it is very important to examine carefully the so-calle
                                          ρ(x) = geu (x) − f (x) ,                                    (4)
 because even if overall characteristics such as the global variance may be compatible with noise,
 faint correlations can be easily visualized and detected to signal a violation of the DVC hypotheses
-DVC: Achievements and Challenges                                                                   27
 (to be interpreted as being acceptable or requiring an enhanced model). In order to ease notations
 in the following, the subscript to ge will be omitted.
     Considering that Equation (1) is now endowed with some tolerance, the determination of the
@@ -572,7 +547,6 @@ specific forms of regularization are very well suited, thereby allowing for a sm
 of DVC to mechanical identification of a constitutive behavior.
     It is important to note that such a regularization may be considered from different standpoints.
 If some information about the mechanical behavior is known, it is natural to use it in the above
-28                                                                                         A. Buljac et al.
 term, and a large weight is adequate. However, when the constitutive law is unknown, the above
 regularization may be seen as selecting the equivalent of “shape functions.” Hence the subspace
 U1 is to be compared with that obtained from, say, a finite element discretization. This may be
@@ -597,7 +571,6 @@ solute value of all coordinates are less than 1/2, and 0 otherwise). Such a func
 regularity of the original signal.
     For instance, starting from discrete spikes (i.e., Dirac comb) centered at voxel centers, this
 convolution provides a piecewise (i.e., voxelwise) constant function. Starting from a voxelwise
-DVC: Achievements and Challenges                                                                     29
 constant function, its convolution would be a continuous one, piecewise linear along lines parallel
 to axes. More generally, if the original fine scale texture is C n (derivatives up to order n exist and
 are continuous), its convolution by w(x) is C n+1 . Exploitation of this line of thought has led to the
@@ -622,7 +595,6 @@ available interpolation procedure will provide the desired final hundredths of v
 It was earlier mentioned that different similarity measures have been proposed to assess regis-
 tration. That is for each voxel, x, the reference gray level f (x) and that of the deformed image
 corrected by a trial displacement field ge(x) are to be compared. As earlier stated, their difference
-30                                                                                      A. Buljac et al.
 is at least (that is when the trial displacement field is the exact solution) equal to the sum of the
 noise affecting each image. Thus the similarity measure implicitly involves a noise model.
     The most common model is white Gaussian noise, which states that the probability distribution
@@ -657,7 +629,6 @@ calls for some comments:
     the sum of squared differences.
  – All the above qualifiers (uniform, white, Gaussian) are essential. Any violation of the above
     would call for a modified measure.
-DVC: Achievements and Challenges                                                                   31
  – Let us consider full-field OCT as a practical case. The 3D image consists of a stack of 2D images
    that correspond to the scatterers assumed to be dilute in a semi-transparent medium. Thus
    for each slice at a constant depth, a uniform white Gaussian model is a fair approximation
@@ -689,7 +660,6 @@ DVC: Achievements and Challenges                                                
                                                        x∈Z
    As above the constant factor of 1/(4ς 2 ) has been omitted. In such cases, as noted in Ref. [211],
    taking the Anscombe transform of the original gray levels [145] or more simply, taking the
-32                                                                                      A. Buljac et al.
    square root of gray levels, fˆ =      f , restores a constant variance noise affecting fˆ. Hence it
                                       p
                         √         p
@@ -721,7 +691,6 @@ DVC: Achievements and Challenges                                                
  – Finally, let us consider the case when the noise is uniform, white, but not Gaussian. In this
    case, it is characterized by a nontrivial probability density function (p.d.f.), p(η). Following
    the above derivation, it is observed that the absence of correlation implies that probabilities
-DVC: Achievements and Challenges                                                                     33
     can be multiplied, and hence their logarithm summed, thereby providing a similarity measure
     that is still proportional to the log-likelihood, or up to a change of sign to comply with the
     above Gaussian case, the similarity measure to be minimized reads
@@ -749,7 +718,6 @@ can be achieved, which is implicitly based on a C ∞ interpolation of both imag
 made the success of Particle Image Velocimetry (PIV) in the early days [2] during which robust
 and fast methods that could be implemented easily were sought, and this technique was a well
 suited answer to these needs.
-34                                                                                        A. Buljac et al.
      However, it is to be stressed that raw fast Fourier transform algorithms assume spatial peri-
 odicity of the functions to be transformed. Thus if the two zones for f and g do not coincide, the
 cross-correlation function (be it computed with FFT or not) takes into account non overlapping
@@ -784,7 +752,6 @@ Equation (1), is not satisfied and should rather be written as
                                        g(x + u(x)) = (1 + a)f (x) + b                               (17)
 where the brightness b and contrast a corrections have been written so that the previous case
 coincides with a = b = 0. It is noteworthy that if no information is available on a and b, it
-DVC: Achievements and Challenges                                                                    35
 may be seen as saying that a and b are part of the noise, but they have some specificities. For
 instance if they have known spatial correlations (say long wavelengths only), the above similarity
 measure SMahalanobis , will lead to cancel brightness and contrast modulations over large distances
@@ -810,7 +777,6 @@ entire image. This is not at all equivalent to treating the problem with a parti
 each of whom a and b are determined anew. The latter problem introduces much more unknowns
 than the former, and hence the uncertainty attached to the determination of the displacement
 (and gray level corrections) is much higher (especially for small subvolume or element sizes, see
-36                                                                                             A. Buljac et al.
 Section 4). It may be desirable to introduce some flexibility in the gray level corrections, but in
 this case again, the best way to proceed is to introduce a parameterization of the way a and b
 may vary in space.
@@ -843,7 +809,6 @@ function, a large sample size is needed and thus a local approach is inappropria
 small number of voxels involved. In addition, a purely local approach would allow the nonlinear
 relationship relating f and ge to differ from one zone to another, thereby further relaxing the
 registration constraints. Another difficulty is that gray levels are subjected to noise, and hence
-DVC: Achievements and Challenges                                                                     37
 they should rather be defined as an interval of width σ (or rather a probability distribution function
 (pdf) having a standard deviation σ). This is essential to compare two gray levels that are supposed
 to be identical. One may wonder where this key parameter appears, since this is usually not made
@@ -868,7 +833,6 @@ when a local approach is used).
 Among the few cases when such nonlinear correspondence may be useful, is when a different
 modality (and hence a different contrast) is used for f and g and still one would like to register the
 two images. One such example was studied in details [225], where x-ray and neutron tomographic
-38                                                                                        A. Buljac et al.
 images of the same sandstone sample were captured, and a common referential was sought to fully
 benefit from both modalities and their resulting contrast. The presence of elements that display
 different contrasts with only one modality forbids the use of parametric relationships, yet it is
@@ -893,7 +857,6 @@ different contrasts, not to mention different resolutions or different acquisiti
 induce slight distortions between the two modalities, it is difficult to define what a good matching
 is. Reference [102] provides a review of early registration techniques that were used on the turn
 of the century.
-DVC: Achievements and Challenges                                                                     39
     In the field of materials science, dealing with different modalities has the potential of revealing
 chemical contrast. For instance dual source x-ray tomography with a simultaneous acquisition of
 the two perpendicular beams set at two different energies provide two 3D images with different
@@ -919,7 +882,6 @@ scheme based on small perturbations. In more general cases, however, corresponde
 the two images has to phrased in more general terms. Even a nonlinear relationship between the
 gray levels of the two modalities may be inadequate, as the same gray level of one modality may
 be expressed as different gray values in the other modality.
-40                                                                                      A. Buljac et al.
     It is for these registrations that a similarity measure based on mutual information is suited [236,
 139]. Mutual information is one choice out of many comparable measures based on joint his-
 tograms, called f-information or f-divergence [226]. As earlier mentioned, the joint histogram does
@@ -941,7 +903,6 @@ the other after registration. It is seen that some morphologic features (crack o
 visible in both modalities and show an excellent continuity. Conversely, other features such as
 the large white inclusion show a large attenuation with neutron imaging but appears as almost
 invisible with the x-ray modality.
-DVC: Achievements and Challenges                                                                            41
                             (a)                                                 (b)
 Fig. 10 Complementary mosaic images showing alternating square patches cut out of the two tomographic
 modalities (x-ray or neutrons) after registration. It is observed that some features (boundary, crack) show an
@@ -957,7 +918,6 @@ parameters to describe the displacement fields, but as this number is reduced th
 the actual displacement from the trial space increases, and hence it may induce a model error [23,
 94]. Thus it is essential to judge the quality of the obtained displacement from the residual field
 ρ to check whether manifestations of unanticipated phenomena would not be visible.
-42                                                                                    A. Buljac et al.
     Another factor may be taken into account, namely, computation time. The manipulation of
 a large quantity of data naturally leads to heavy computational load. Hence a natural idea is to
 partition the images into small subvolumes and register them independently. When subvolumes
@@ -982,7 +942,6 @@ tests.
     However, even if more and more parameters are used to perform the registration of subvolumes,
 often only the displacement vector of the center is kept, and a final post-processing is carried out
 that consists of computing an interpolated (and smoothed) displacement field based on the discrete
-DVC: Achievements and Challenges                                                                  43
 measurements at each subvolumes center. This last operation is performed without reference to
 the analyzed images and thus is not considered here as part of the DVC computation. However,
 one should note that this is a critical step for computing, say, strain fields.
@@ -1007,7 +966,6 @@ referred to as C8-DVC. It is to be noted that there is not a big difference betw
 descriptions of the kinematics. The same type of intrinsic complexity may be incorporated within
 one C8-element and one local cubic zone of the same shape and size [122]. However, within a global
 setting, the displacement field is continuous at any location within the ROI (without resorting
-44                                                                                      A. Buljac et al.
 to a post-processing step), and the field used for the determination is trusted for each voxel,
 rather than keeping only the central displacement and discarding all other computed parameters.
 Moreover, the global feature of the approach leads to the fact that neighboring elements help
@@ -1033,7 +991,6 @@ As earlier mentioned, this violation will often be quite visible in the residual
 difficult to detect otherwise. Segmentation may then be quite easy. Moreover, it has been proposed
 to use an enriched kinematics, following X-FEM approaches (as in 2D-DIC [188]), through an
 eXtended C8-DVC (or XC8-DVC) [192, 185].
-DVC: Achievements and Challenges                                                                                45
     To illustrate such situations, let us consider a four-point flexural test on plasterboard. This
 material is composed of a plaster foam core cast between two paper linings. It now is the most
 widely used interior finish in construction. In addition to the fire resistance to be checked, a
@@ -1051,7 +1008,6 @@ and at several loading levels (the final deformed configuration is shown in c). 
     The experiment was carried out on LMT’s tomograph (NSI X50+) with the following acquisi-
 tion parameters: the beam tension is 90 kV and the electron current 200 μA, the physical size of
 one voxel is 25 μm. 900 radiographs were acquired in a 360°-rotation for each scan. The total du-
-46                                                                                          A. Buljac et al.
 ration of an acquisition is 60 min. The sample was imaged at initial state and then at three levels
 of loading. Figure 11(b-c) shows the analyzed volumes by DVC. The ROI after voxel aggregation
 has a size of 792 × 192 × 192 voxels. The physical voxel size then becomes 50 μm. No crack is
@@ -1070,7 +1026,6 @@ crack spacing is of the order of the thickness of the plate.
 Fig. 12 DVC results in 4-point flexure. 3D renderings of thresholded gray level residual (a), longitudinal
                                                   μ
 displacement (b) expressed in voxels (1 voxel ≡ 50 m), and maximum eigen strain fields (c)
-DVC: Achievements and Challenges                                                                  47
     Let us insist on the fact that the tomographic observations alone would not allow the mecha-
 nism of failure of plasterboard to be deduced from such tests. The contribution of DVC is crucial
 in order to finely analyze them.
@@ -1095,7 +1050,6 @@ timate at step n, {u}(n) , so that {u}(n+1) = {u}(n) + {δu}. The correction is 
 the osculating quadratic form that approximates TDVC . The following linear system is thus to be
 solved
                                              [M]{δu} = {b}                                      (21)
-48                                                                                    A. Buljac et al.
 where the matrix [M ] is the Hessian of TDVC , which can be computed once for all at conver-
 gence [197, 170], i.e., replacing geu by f
                                       X
@@ -1124,7 +1078,6 @@ detailed further down.
     The second pitfall is that the above osculating harmonic potential is a good approximation
 only within a range of variation of the displacement that can be compared to the correlation
 length of the image texture. This means that when u is close to the actual solution, say because
-DVC: Achievements and Challenges                                                                      49
 it has been well initialized, it will easily converge to the correct solution. In contrast, for very
 poor initial guesses, i.e., very remote from the actual one, the above Newton’s algorithm may not
 converge.
@@ -1149,7 +1102,6 @@ conditioning, and thereby decreasing the uncertainty, as will be shown in the ne
 In the above discussions, the kinematic bases were chosen mostly based on numerical convenience.
 However, little consideration was paid to the relevance of a particular basis. To do so, it is necessary
 to incorporate some additional information coming from the mechanical behavior of the sample.
-50                                                                                     A. Buljac et al.
 Thus prior to discussing more elaborate regularization strategies, a short review of the usage of
 DVC-measured displacement fields in the context of mechanical identification is proposed.
     Comparisons between DVC measurements and FE calculations have been first attempted for
@@ -1175,7 +1127,6 @@ consistently compared with FE simulations [221].
 key aspect is related to the management of boundary conditions [78, 185, 206], as discussed above
 for biomechanical studies. If measured boundary conditions are used, it is possible to evaluate gray
 level residuals from simulated displacement fields and estimate the absolute quality of numerical
-DVC: Achievements and Challenges                                                                 51
 models [29]. Otherwise, only relative qualities are obtained when measured displacements are com-
 pared with computed fields. With such approaches, ductile damage predictions could be probed
 for different experimental configurations with cast iron and partial validations were achieved with
@@ -1200,7 +1151,6 @@ In registration techniques applied to medical imaging, regularization techniques
 sidered very early on. They all derive from Tikhonov-like propositions [215] to account for various
 constraints by adding a penalty term to the DVC cost function [199, 102, 195, 115]. In experimental
 mechanics such type of approaches were introduced more recently [123, 122, 214] extending elastic
-52                                                                                     A. Buljac et al.
 regularization initially introduced in 2D-DIC [190, 218]. The regularization strategy allows the
 DVC problem to be made well-posed even when discretized onto a very fine mesh. It was shown
 that the ultimate limit of a regular cubic mesh with elements reduced to a single voxel could
@@ -1228,7 +1178,6 @@ they belong to the kernel of the gradient operator. However, rigid body rotation
 gradient and hence they would be dampened out by such regularization. Requiring that all rigid
 body motions belong to the kernel of L(u), selects automatically linear functions of strain. Hence
 |L(u)|2 coincides with the potential energy density of a linearly elastic solid. Such a form may be
-DVC: Achievements and Challenges                                                                  53
 suited when observing a solid that is not subjected to a mechanical loading, but for mechanical
 tests, such a regularization would drive the solution toward a rest state.
     Following along these lines leads to a second order differential operator for L, which can be
@@ -1253,7 +1202,6 @@ should mimic plastic strain. For instance, plastic strains are generally isochor
 may choose an incompressible elastic law to prevent any volume change [214]. More generally,
 the tangent behavior is a good candidate for identifying the proper elastic law to be used. When
 approaching a perfectly plastic plateau, there exists a strain direction where the elastic stiffness
-54                                                                                       A. Buljac et al.
 vanishes. This calls for an anisotropic elastic kernel that would leave free the easy strain direction
 but would penalize shear in a different direction.
 3.5.2 Regularization weight
@@ -1278,7 +1226,6 @@ displacement field represented as a column vector of nodal displacements, S2 rea
 placement field. Within a finite element discretization where [K] is the elastic stiffness matrix,
 one can write
                                  TReg [{u}] = {u}> [K]> [D][K]{u}                                  (27)
-DVC: Achievements and Challenges                                                                     55
 where [D] is a diagonal matrix valued 1 for internal nodes (where the balance equation holds)
 and 0 on boundary nodes (where a displacement or nonzero load is prescribed).
      Let us now consider as a trial displacement field a plane wave, vλ (x) = e1 exp(ie2 · x/λ) with
@@ -1305,7 +1252,6 @@ remarks:
      shape functions are not designed to be mechanically realistic but rather convenient, either for
      parallel computation or for benefitting from all meshing tools available. In contrast, the above
      regularization uses a much more realistic small-scale displacement interpolation;
-56                                                                                     A. Buljac et al.
  – Provided the regularization length is larger than the element size, the influence of the mesh
    (and its fineness) is reduced to a minimum;
  – Changing the regularization length is trivially performed without having to re-mesh. It is
@@ -1331,7 +1277,6 @@ remarks:
  – Although this regularization is a filter, it should not be confused with a filtering performed
    in a post-processing stage. The former is applied together with the registration procedure,
    and hence the filtered field is evaluated on its registration quality, while the latter has lost
-DVC: Achievements and Challenges                                                                   57
     its connection with the images, and hence the detrimental effect of filtering on registration
     cannot be estimated.
     If the linear elastic problem used for the regularization is not trusted, then a small regu-
@@ -1357,7 +1302,6 @@ When L is the symmetric part of the gradient, and p = 2 this form looks like an 
 density. When p tends to 1, the (nonlinear elastic) behavior would look like perfect plasticity.
 When p is less than 1, a softening branch develops implying loss of convexity. In fact convexity
 (p ≥ 1) is a very convenient property that ensures the existence of a unique minimum and hence
-58                                                                                      A. Buljac et al.
 an independence with respect to the algorithm used to minimize the functional. On the other
 hand, p ≤ 1 tends to concentrate high strain over small supports, a feature called “localization
 instability” frequently met in plasticity and damage theories [126]. When dealing with cracks, it
@@ -1378,7 +1322,6 @@ which is to be expected since the displacement field is more constrained in the 
 displacement gradients have been filtered out due to the elastic regularization, which acts as a
 low-pass filter. The high frequency fluctuations (i.e., measurement uncertainties) have also been
 taken out since they are not mechanically admissible.
-DVC: Achievements and Challenges                                                                                 59
                   (a)                                   (b)                                   (c)
                   (d)                                   (e)                                   (f)
 Fig. 13 Foamed gypsum subjected to 4-point flexure. 3D renderings of the longitudinal displacement (expressed
@@ -1393,7 +1336,6 @@ equal to 2.65 % (as for unregularized DVC). Figure 13(c,f) shows the displacemen
 longitudinal direction, and the corresponding maximum principal strain. In the present case, the
 displacement field is very smooth outside the cracked areas, which are well captured and localized
 (at the scale of one element size).
-60                                                                                        A. Buljac et al.
 3.6 Integrated DVC
 The limit of a diverging regularization length scale ξ → ∞ is also well-defined. It reduces the
 search space for u(x) to U1 that is now defined as the kernel of the operator L[u]. Therefore, the
@@ -1417,7 +1359,6 @@ scales.
 of spheroidal graphite cast iron (Figure 14(a)) and subjected to tensile loading by using the
 testing machine shown in Figure 7(a). The same procedure as discussed in Refs. [133, 132, 185]
 was followed in the sample preparation. The cross-section of the sample is 1.6 × 1 mm2 . The
-DVC: Achievements and Challenges                                                                 61
 specimen is loaded in seven incremental steps (Figure 14(b)). The first two scans of the reference
 configuration allow displacement uncertainties to be evaluated.
     A complete scan of the sample corresponds to a 360° rotation along its vertical axis, during
@@ -1443,7 +1384,6 @@ noded tetrahedra and linear shape functions). The characteristic element size is
 the crack surface is determined [185].
     At convergence, the hardening modulus is found to be equal to 1300 MPa and the hardening
 exponent is equal to 0.4. The yield stress for an offset of 0.2 % is found to be equal to 200 MPa.
-62                                                                                     A. Buljac et al.
 When the measured load history is compared to the corresponding predictions (Figure 14(b)),
 significant differences are observed. The global residuals are significantly higher than the mea-
 surement uncertainties (i.e., 10 times higher). This is an indication of model errors. At least three
@@ -1464,7 +1404,6 @@ and contribute to this residual. This is an additional sign that registration wa
 compared to unregularized DVC, with the same mesh, the global residual is only slightly higher
 (i.e., a factor 1.25 for integrated DVC instead of 1.22 for unregularized DVC, when the global
 residuals are normalized by the level observed with almost no motion).
-DVC: Achievements and Challenges                                                                         63
                           (a)                                                  (b)
                                 (c)                                            (d)
 Fig. 14 Identification results via 4D registration. (a) Orthoslice of the gray level volume of scan #1. (b)
@@ -1476,7 +1415,6 @@ used [93, 29, 31]. The RMS difference between measured and computed displacement
 to 0.5 voxel. This level is to be compared with the measurement uncertainty. With the chosen
 discretization, the standard displacement uncertainty is equal to 0.06 voxel. The RMS difference
 is ≈ 8 times the displacement uncertainty, again signalling a model error. To understand where
-64                                                                                           A. Buljac et al.
 the displacement discrepancies are located, Figure 15 shows the displacement fields measured by
 DVC and integrated DVC for the next to last scan. It is worth remembering that the Dirichlet
 boundary conditions of integrated DVC are measured data (via regular DVC). Consequently,
@@ -1493,7 +1431,6 @@ than ten times the measurement uncertainties shows that the simple elastoplastic
 herein should not be discarded. However, it should be enriched to account for damage especially
 at the last load level where all residuals increase significantly. There is clearly some room for
 progress by improving the numerical model along all the lines discussed above.
-DVC: Achievements and Challenges                                                                   65
 3.7 DVC for NDE purposes
 Considered from an abstract standpoint, DVC is the art of computing image differences taking
 into account possible deformations between images. Differences arising from distortions could be
@@ -1517,7 +1454,6 @@ due to resin impregnation or infiltration, molding, curing as well as for a qual
 the detection of weaving abnormalities (e.g., missing yarn, bad positioning, loop). The former are
 called “metric differences,” while the latter are called “topological differences” (see Figure 16) as
 they cannot be reconciled by a simple continuous deformation of the medium [204, 152].
-66                                                                                               A. Buljac et al.
 Fig. 16 Residual field. The lowest values are made transparent to allow for visualization of the largest differ-
 ences. In this particular test case, two yarns were omitted in one weaving as compared to the reference one. The
 black dotted curves are drawn by hand to guide the reading along the missing yarns. Residuals highlight differ-
@@ -1538,7 +1474,6 @@ can be defined by virtual models (FE, CAD). The procedure allows woven composite
     As expected for woven fabrics, it is important to identify and follow the weaving process
 itself (i.e., the yarns) from a tomographic image. DVC in such cases may offer a very convenient
 alternative to segmentation since topology is preserved. The transformation between model and
-DVC: Achievements and Challenges                                                                                 67
 actual part allows for the transfer of whatever feature available from one world into the other
 one. For instance, if yarns are labelled in the model, their label can immediately be transferred
 onto the actual image. If a mesh has been tailored to the model, it can be mapped without effort
@@ -1556,7 +1491,6 @@ model.
 Fig. 17 Example of a computed virtual strain field obtained from a tomographic image projected onto the
 corresponding virtual model of the textile. The color encoding refers to the shear strain εxy , where (x, y) is the
 front plane
-68                                                                                      A. Buljac et al.
     In general, DVC applied to composite materials offers applications ranging from NDE of com-
 posite parts up to the validation of new weaving architectures for composite structures. Moreover,
 it improves over current NDE tools since they may not provide enough information to detect sub-
@@ -1580,7 +1514,6 @@ to create a new volume that is subsequently registered with the reference volume
 95, 137, 46]. For extended DVC, the prescribed translation was uniform or discontinuous to probe
 the uncertainties associated with discontinuous enrichments [192, 185]. This first type of analysis
 mainly probes the interpolation scheme of the gray levels to achieve sub-voxel resolutions.
-DVC: Achievements and Challenges                                                                 69
     The second type of approach also uses only one reference volume but consists of adding noise
 to create a new volume, which is correlated with its noise-free reference [123, 122]. The advantage
 of such approaches is that i) closed-form solutions can be derived, and ii) their predictions can
@@ -1606,7 +1539,6 @@ price to pay is related to the computation time that is higher.
 to tomography, the laminography technique [82, 88] enables for in-situ imaging of studied regions
 in plate-like samples but involves incomplete sampling, which may increase the measurement
 uncertainty. Laminography is still a recent imaging technique [87, 89]. Consequently, there is a
-70                                                                                       A. Buljac et al.
 need for metrological assessment of the measured displacement fields and the corresponding strain
 fields [156, 28]. The uncertainty levels are estimated by following the last presented method that
 includes multiple scans prior to the experiment itself:
@@ -1632,7 +1564,6 @@ rotations. The identified rigid body motions are then extracted from measured fi
 in an estimation of the measurement errors [131]. The root mean square error associated with
 each displacement component is then computed, whose average σu will be reported for C8-DVC.
 The size ` of each C8 element is the length expressed in voxels of any edge. Different element
-DVC: Achievements and Challenges                                                                                           71
 sizes are considered, namely, 16, 24, 32, 48 and 64-voxel elements. Figure 18 shows the standard
 displacement uncertainty as a function of the element size. In the figure, repeated scans (i.e., bis
 cases) are shown with solid lines while rigid body motion (rbm) cases are depicted with dashed
@@ -1665,7 +1596,6 @@ rings do not move) and it can be considered as equivalent to a bis case. This is
 T3 bis and AA2198 T8 rbm results almost coincide. However, when larger rigid body motions
 are applied to the AA2198 microstructure, significant degradations occur as can be seen in the
 example of AA2198 T3 rbm.
-72                                                                                     A. Buljac et al.
     Conversely, the AA2139 microstructure (with initial voids) is less affected by rigid body mo-
 tions. AA2139 T8 rbm and AA2198 T3 rbm have almost identical size/position of the region of
 interest and amount of rigid body motion but still the relative gap between the corresponding
@@ -1691,7 +1621,6 @@ worst cases from Figure 18 normalized by the overall noise level calculated from
 residual fields. When controlled by white Gaussian noise, nodal displacement uncertainties divided
 by the noise level are expected to follow a power law of the element size ` with an exponent
 −3/2 [122]. The results in Figure 19 show that this dependence is not observed. This may be due
-DVC: Achievements and Challenges                                                                                  73
 to the occurrence of ring artifacts, which are observed in Figure 2 and which are clearly more
 significant than random noise for these cases.
                   Normalized displacement resolution (-)
@@ -1717,7 +1646,6 @@ displacement and strain resolutions of the studied material.
 4.2 Theoretical study of projection noise
 One important source of uncertainty (albeit not always dominant as seen in the previous examples)
 is the presence of noise in the images. This question, at least when the variance of noise is
-74                                                                                      A. Buljac et al.
 low enough, can be treated on a theoretical ground using perturbation analyses. They provide
 quantitative estimates of the influence of noise on the kinematic analysis. This is important
 inasmuch as the obtained estimates of the full covariance matrix can be further used to evaluate
@@ -1742,7 +1670,6 @@ When noise is non-Gaussian, it will tend to a Gaussian distribution, and the var
 variances) are correctly computed with an argument based on Gaussian noise. However, higher
 order moments (that is 4th — or kurtosis — to start off with) have to be considered to see how
 close the measurement fluctuation is to a Gaussian distribution.
-DVC: Achievements and Challenges                                                                     75
     It can be noted that the situation is equivalent to the one where the noise affecting the reference
 image would be null and that of g would be an effective noise ηeg = ηg − ηf , white, Gaussian and of
 variance 2σ 2 , where σ 2 is that of each ηf or ηg . This observation gives an easier computation but
@@ -1769,7 +1696,6 @@ to assess their sensitivity to noise. For that purpose, the 100 largest eigenval
 the lowest sensitivities of measured nodal displacements) for the studied microstructures and
 element size (`=32 voxels) are shown in Figure 20. This information shows the isolated influence
 of the microstructure quality on the uncertainty. AA2198 T3 and T8 have higher eigenvalues than
-76                                                                                             A. Buljac et al.
 AA2139 T3 and T8 although in the final uncertainty analysis the opposite trend is observed. The
 heat treatment (T3 or T8) does not play a significant role here. The grading that is observed
 from AA2198, the most prone to noise, to AA2139 intermediate and finally cast iron, showing
@@ -1783,7 +1709,6 @@ these images seems more due to ring artifacts than random noise. This observatio
 importance of additional influences (e.g., acquisition and reconstruction artifacts) on uncertainty.
 Fig. 20 The largest 100 eigenvalues of the inverse DVC matrix [M ] for the studied microstructures and element
 size `=32 voxels
-DVC: Achievements and Challenges                                                                   77
 4.3 How white is white noise?
 The above considerations work well for white noise. Such may be the case for the noise affecting
 radiographs, but the fact that the 3D volume is computed naturally introduces correlations in
@@ -1808,7 +1733,6 @@ where F[R](k) = |k| is the so-called Ram-Lak filter [114]. The inverse Radon tra
 with a uniform variance σ 2 . This noise in the projection, ηp , induces a noise in the reconstructed
 image, ηf , which has to be characterized. The linearity of the reconstruction implies that ηf is
 centered Gaussian noise as well. It is also to be observed, although this may be less intuitive, that
-78                                                                                        A. Buljac et al.
 this noise is spatially stationary. In particular, the distance to the rotation axis plays no role. One
 way to show this property is to note that the rotation axis may be “moved” virtually by a mere
 translation of the different projections along r, by a quantity that depends on the angle θ. These
@@ -1836,7 +1760,6 @@ that of quadratic differences.
 the representation of voxels are always present. The effective noise is never actually white at the
 pixel scale, but displays a slight broadening and possibly anti-correlations that come from details
 of the implementation. If one wants however to see how good/bad the approximation of white
-DVC: Achievements and Challenges                                                                    79
 noise is, it is fairly easy to generate a series of projections that consists of uncorrelated Gaussian
 noise ηp with the very same format as the projections to be exploited, compute the inverse
 Radon transform of this noise with the used reconstruction code (one single slice is sufficient) and
@@ -1860,7 +1783,6 @@ other, that is for a null displacement, and not necessarily the actual one.
     Very often the detector exhibits spatially random bias but that is steady in time (and hence
 in θ), ηdet (r, z). (A similar effect may result from imperfect flat-fields.) Some tomographs now
 come with a translation of the detector during scan rotation, and these motions are then further
-80                                                                                            A. Buljac et al.
 numerically corrected by a mere translation of the projection. This procedure averages out the
 bias for a large part, and the reconstructed volumes are typically of better quality. Otherwise
 these biases give rise to “rings” or “half-rings” depending on the spanned angles during the scan.
@@ -1891,7 +1813,6 @@ image (ĝ) u
 ηdet . With the latter, a new estimation of both fest and gest is produced, from which DVC will
 refine the determination of the kinematics, and iteratively, better and better determinations of
 the bias and kinematics will be obtained.
-DVC: Achievements and Challenges                                                                       81
     Yet another possibility, if time allows, is to acquire several images of the sample without any
 mechanical loading, but only rigid body motions. In that case, it is rather straightforward to
 estimate this motion very precisely and the above procedure may provide a prior determination
@@ -1918,7 +1839,6 @@ parameters (and/or fields) that are involved in the measurement. This general ru
 to judge in the end whether the determined quantities (i.e., both measurements of interest but
 also artifacts) are consistent with the prior knowledge (or at least assumptions) used to analyze
 the case under consideration.
-82                                                                                     A. Buljac et al.
 4.4.2 Beam hardening
 In lab tomographs, the x-ray source has generally a broad distribution of energies. X-ray absorption
 however depends on the frequency (or energy). Nevertheless, reconstruction softwares usually
@@ -1942,7 +1862,6 @@ viscous relaxation, or to delayed damage or plastic flow. In such cases, the rec
 appears to be blurred, and DVC may produce erroneous results or at least uncertain ones, prone to
 high noise. If residuals are not examined in details, such phenomena may go unnoticed. Similarly
 instead of the sample motion, it may be the rotation axis of the scan that does not remain steady.
-DVC: Achievements and Challenges                                                                 83
 These effects are common ones in tomography but the coupling of tomography with in-situ testing
 aggravates such risks.
     Within the same type of artifacts, let us mention a last one due to the change in the source-
@@ -1967,7 +1886,6 @@ of (coherent) light may be too small to permit the detection of further scattere
 of the sample moves a particle from a hidden to a visible position or vice-versa, registration may
 not provide a faithful account for motion. In such cases, which resemble the shadows cast by
 very absorbing features in x-ray tomography [229], a mask should be introduced, which would
-84                                                                                      A. Buljac et al.
 correspond to the visible “horizon.” Any variation that affects a position that is beyond the
 horizon should not be utilized. This may be compared to edge effects in classical DIC [99] when a
 feature present in the region of interest for the reference image is pushed outside the field of view
@@ -1990,7 +1908,6 @@ can hardly be modified in the bulk in order to enhance contrast. Some attempts w
 at the expense of changing the behavior of the investigated material. This is particularly true
 when studying ductile of brittle fracture [94]. Model materials were also considered for which the
 attenuation contrast was sufficient [207, 69]. Natural materials such as wood (thanks to its cellular
-DVC: Achievements and Challenges                                                                     85
 microstructure) enabled DVC analyses to be successfully performed [68, 70]. Similarly, low density
 wood fiberboards could be studied via DVC [222].
      This is a major difference with 2D DIC, where a homogeneous or transparent material can
@@ -2015,7 +1932,6 @@ a DVC analysis (e.g., ring artifacts can be significantly reduced [183]) is alwa
 is safer to include this filter in the similarity measure, or to leave as an unknown the effect to
 be filtered out, in order to validate the consistency of the assumption(s) made, and check that
 the filter did not affect the true microstructure. Last, let us note that when some information is
-86                                                                                      A. Buljac et al.
 discarded and still an acceptable spatial resolution is sought, suited regularization strategies are
 very helpful [199, 102, 195, 115, 123, 122].
 5.2 DVC algorithms
@@ -2040,7 +1956,6 @@ strategy, Lagrangian or Eulerian strain descriptors will be computed [223]). Alt
 can be advected in order to make the nodes follow the same material points.
     The computation of the deformed volume corrected by the current estimate of the displacement
 field requires gray level interpolations to be performed for all voxels belonging to the ROI, and
-DVC: Achievements and Challenges                                                                   87
 more than once for local approaches with overlapping subvolumes. The algorithms being iterative,
 such operations are repeated numerous times. To avoid such repeated interpolations lookup tables
 can be pre-computed [170] in order to accelerate DVC runs.
@@ -2066,7 +1981,6 @@ scans is available in the analysis. It will also make the calculations even more
 of the above routes may turn out to be very useful (e.g., PGD [165]). It is believed that projection-
 based approaches are more suitable since they precisely provide much more temporal information
 than using fully reconstructed volumes at different levels of load.
-88                                                                                       A. Buljac et al.
 5.3 Identification and validation
 The validation of material models using tomographic data still is in its infancy (see Section 3.4).
 This first step is already very challenging for various reasons. First, in-situ (or ex-situ) testing
@@ -2089,7 +2003,6 @@ importantly, it allows gray level residuals to be assessed not only for standard
 but also for numerical simulations [29]. These residuals can be evaluated independently for DVC
 and numerical simulations. The two approaches are therefore probed individually and their merits
 (and shortcomings) are assessed in an absolute manner.
-DVC: Achievements and Challenges                                                                         89
                             T4gmeshg
                             generation
                                             g
@@ -2121,7 +2034,6 @@ such endeavors.
 to tomographic data (i.e., tomography or laminography typically give access to Gvoxel-volumes).
 For instance, each reconstructed volume can be obtained from a set of 6, 000 × 12-Mpixel radio-
 graphs (i.e., 144 Gbytes per considered step for 16-bit digitizations). For in-situ experiments the
-90                                                                                      A. Buljac et al.
 typical number of scans now routinely exceeds ten, which leads to more than 1 Tbyte of data
 for a single experiment. The mere handling and visualization of such enormous amounts of data
 becomes challenging. Further, their processing is also becoming tedious. Model/data reduction
@@ -2146,7 +2058,6 @@ to spurious motions) that will need to be accounted for at the reconstruction st
 experiments. On the contrary, this is an excellent way of generating more data in a short time. In
 the remaining part of this section different directions are listed, which give solid hopes on ways to
 actually decrease the needed experimental data, and hence achieve a better efficiency but not from
-DVC: Achievements and Challenges                                                                   91
 a better accumulation of data. The different proposed routes deal with the ability to compress
 information with no (or a very modest) loss that have been proposed in the recent years. The first
 one, Section 5.5, aims at reducing the number of projections for reconstructing a tomographic
@@ -2170,7 +2081,6 @@ exploitation of some sparsity in the description of the to-be-reconstructed mate
 the chosen test case for the initial illustration of the benefit of TV-regularization was the Shepp-
 Logan phantom, a simple mathematical model of an idealized brain image, composed of few
 “phases,” so that the boundary of those different phases, where the total variation is non-zero,
-92                                                                                        A. Buljac et al.
 was indeed sparse. And this sparsity is favored by using an L1 norm of the gradient (i.e., the total
 variation, TV), yet preserving convexity of the problem.
     The reliability of such approaches for medical diagnostics has sometimes been questioned [92]
@@ -2196,7 +2106,6 @@ display progressively more uncertainty in its microstructure. Actually, this is 
 When the quality of the reconstruction is studied versus the number of projections, it is observed
 that the problem displays an abrupt “phase transition,” from a solvable problem where the re-
 construction quality is very good to an unsolvable problem, where no solution is obtained [53].
-DVC: Achievements and Challenges                                                                     93
 It is difficult to theoretically qualify this abrupt transition, and determine the minimum number
 of projections required to reconstruct a solution, as it depends on the quantity of information
 present in the object to be reconstructed, and hence also on the additional information bought
@@ -2221,7 +2130,6 @@ in laboratory facilities), it aims to measure the 4D displacement field from the
 series of 2D projections (i.e., the projection at an angle θ(t) of the 3D microstructure) acquired
 at different times, t, angles, θ(t)) and loadings F (t). One reference 3D volume (using classical
 means) is assumed to be available in order to compute the correction term.
-94                                                                                     A. Buljac et al.
      The similarity measure is here the squared difference of projections (since a white Gaussian
 noise is generally valid for projections). One set of projections is that of the deformed volumes
 p(r, t) at different loading steps (just one projection per loading step) and the other one is the
@@ -2248,7 +2156,6 @@ that the time basis also offers the opportunity to include the time history comi
 modality. For instance, in the present case, a force measurement, F (t), is available. If the sample
 were linearly elastic, F (t) would be naturally relevant. One can also hybridize different signals
 (e.g., force and time), and any nonlinear functions thereof.
-DVC: Achievements and Challenges                                                                    95
     In the case of a large number of unknowns, the computation of the Ns × Nt degrees of freedom
 may be costly. The so-called DIC-PGD framework has been developed to directly extract the
 dominant displacement modes (using space [175, 80] or space-time [111] separation) and provides
@@ -2276,7 +2183,6 @@ and thus one iteration is obtained by solving the following linear problem
 5.6.2 Experimental test case
 The test case for this study is an in-situ tensile test on a ductile cast iron sample. The geometry
 of the sample is shown in Figure 22(a). (Similar samples were studied in Refs. [219, 93].) The
-96                                                                                               A. Buljac et al.
 central part (rectangular cross section of 1.31×0.91 mm2 ) is thinned with a radius of 20 mm
 in order to ensure that the specimen will fail in the ligament area and not in the grips. The
 sample, which was mounted in an in-situ tensile testing machine similar to that used by Buffière
@@ -2295,7 +2201,6 @@ to reduce acquisition noise. The radiographs were cropped to a definition of 954
 as to concentrate on the central part of the sample. The projections were obtained after flat-field
 normalization and standard beam hardening corrections with a third order polynomial [91] due
 to the high absorption of cast iron. Reconstructions and projections were performed with the
-DVC: Achievements and Challenges                                                                                97
 ASTRA toolbox [227] making use of the Feldkamp-Davis-Kress (FDK) reconstruction procedure
 suited for cone beams [61].
     The in-situ experiment consisted of three phases:
@@ -2313,7 +2218,6 @@ purposes.
 Fig. 23 127 force measurements of the tensile test starting from 250 N. A first complete revolution is performed
 at constant load, and the load is subsequently increased up to failure. The reference tomographic scan is acquired
 just before time 0.
-98                                                                                    A. Buljac et al.
 5.6.3 Results of the 4D spatiotemporal procedure
 It is proposed to focus on the central part of the sample where large plastic strains are expected.
 A first evaluation of the transverse mean rigid body motions (i.e., perpendicular to the tensile
@@ -2339,7 +2243,6 @@ during time step [0,49] and linear during the load increase part
                                      χ5 (t) = max(0, (t − 49))
     The 4D problem is composed of 40 degrees of freedom (i.e., 5 time and 8 space shape functions,
 χ and φ respectively) and focuses on the region of interest corresponding to the projected cube
-DVC: Achievements and Challenges                                                                             99
 element. Figure 24 shows the residual field change before and after registration. The residuals are
 rescaled to the dynamic range of the reference projection. It can be seen that a large part of the
 residual has been erased meaning that the kinematics has been well captured.
@@ -2358,7 +2261,6 @@ where the edges of the sample are aligned with the x-ray beam, namely, where the
 to the radial displacement field is high. After the transverse translation correction, it increases
 to 23.4 dB. Finally, when the axial strain is accounted for as above described, the SNR reaches
 26.8 dB.
-100                                                                                                  A. Buljac et al.
                                   (a)                                               (b)
 Fig. 25 (a) Measured displacement of the 8 nodes. During the first revolution (t ≤ 50) a slight compression is
 visible, which is attributed to a relaxation phenomenon. In the increasing load part, the central region is stretched
@@ -2379,7 +2281,6 @@ number de degrees of freedom at a decent level [111].
 The above example showed that a tremendous potential exists either to save time for getting the
 same information, or rather, to increase the time resolution at the same experimental time cost.
 Such a gain is obtained from a better definition of what is known and what is not, starting from
-DVC: Achievements and Challenges                                                                    101
 the ultimate goal (e.g., mechanical properties), and progressively assembling from the accessible
 experimental data and the modeling a complete picture. Moreover, even if redundancy is reduced,
 as the primary information itself (i.e., the set of radiographs) has been severely deflated, it remains
@@ -2403,7 +2304,6 @@ mechanics of materials (and structures).
 Over the last two decades, DVC has been made operational and reliable for very large classes of
 materials, wider than originally considered, and together with the progress of tomography and
 more generally 3D imaging modalities, it is today a very powerful experimental technique serving
-102                                                                                      A. Buljac et al.
 in particular the field of mechanics of materials. Commercial codes are now available, for local
 and global approaches, which makes DVC a tool that does not necessarily require the user to
 implement their own code. Further, the technique is gradually adopted by industry in the fields
@@ -2429,7 +2329,6 @@ optimal in terms of their least sensitivity to acquisition noise.
 Commercial (i.e., general purpose) testing systems are now available. The specific conditions
 associated with 3D imaging means will require the experimentalist to more often design their own
 loading devices in order to be compatible with the testing environment. Two options are possible.
-DVC: Achievements and Challenges                                                                   103
 First the testing machine (and the sample) is put on the turntable of the imaging system. Second,
 the imaging system is built around testing machines (as the patient in a medical scanner). This
 second route is more delicate, but not impossible, when the protection to radiation has been
@@ -2455,7 +2354,6 @@ proaches DVC is not a stand-alone tool, but one link out of many forming a chain
 mechanical testing and mechanical identification and validation.
     Further broadening the range of applications will require in situ experiments to be performed
 faster and possibly uninterrupted. Currently, lab tomographs require acquisition times lasting at
-104                                                                                              A. Buljac et al.
 least tens of minutes, which means that the load and displacement have to remain constant in
 order to ensure good reconstructions. Thanks to the beam power of third generation synchrotrons,
 subsecond scans are possible with the use of high speed cameras. However, spinning the sample and
@@ -2480,7 +2378,6 @@ within the DICCIT project, and ESRF for MA1006, MI1149, MA1631,MA1932, and ME136
 Stephen Hall, Per-Lennart Larsson, Eric Maire, Cino Viggiani, and Drs. Jérôme Adrien, Edward Andó, Do-
 minique Bernard, Xavier Brajer, René Gy, Lukas Helfen, Thilo Morgeneyer, Amir Nahas, Estelle Parra, Mehdi
 Rebai, Julien Schneider are acknowledged.
-DVC: Achievements and Challenges                                                                           105
 References
   1. J. Adam, M. Klinkmueller, G. Schreurs, and B. Wieneke. Quantitative 3D strain analysis in analogue ex-
      periments simulating tectonic deformation: Integration of X-ray computed tomography and digital volume
@@ -2512,7 +2409,6 @@ References
      mapping using X-ray tomography. EXPERIMENTAL MECHANICS, 39(3):217–226, 1999.
  13. E. Beaurepaire, A.C. Boccara, M. Lebec, L. Blanchot, and H. Saint-Jalmes. Full-field optical coherence
      microscopy. OPTICS LETTERS, 23(4):244–246, 1998.
-106                                                                                                  A. Buljac et al.
  14. A. Benoit, S. Guérard, B. Gillet, G. Guillot, F. Hild, D. Mitton, J.-N. Périé, and S. Roux. 3D analysis from
      micro-MRI during in situ compression on cancellous bone. JOURNAL OF BIOMECHANICS, 42(14):2381–
      2386, 2009.
@@ -2544,7 +2440,6 @@ References
  24. A.I. Bowler, B.W. Drinkwater, and P.D. Wilcox. An investigation into the feasibility of internal strain
      measurement in solids by correlation of ultrasonic images. PROCEEDINGS OF THE ROYAL SOCIETY
      A-MATHEMATICAL PHYSICAL AND ENGINEERING SCIENCES, 467(2132):2247–2270, 2011.
-DVC: Achievements and Challenges                                                                              107
  25. R. Brault, A. Germaneau, J.-C. Dupré, P. Doumalin, S. Mistou, and M. Fazzini. In-situ Analysis of
      Laminated Composite Materials by X-ray Micro-Computed Tomography and Digital Volume Correlation.
      EXPERIMENTAL MECHANICS, 53(7):1143–1151, 2013.
@@ -2576,7 +2471,6 @@ DVC: Achievements and Challenges                                                
      52(2):489–509, 2006.
  35. E.J. Candès, J. Romberg, and T Tao.
  36. D.C. Champeney. A Handbook of Fourier Theorems. Cambridge University Press, Cambridge (UK), 1987.
-108                                                                                                A. Buljac et al.
  37. Y. Chen, E. Dall’Ara, E. Sales, K. Manda, R. Wallace, P. Pankaj, and M. Viceconti. Micro-CT based finite
      element models of cancellous bone predict accurately displacement once the boundary condition is well
      replicated: A validation study. JOURNAL OF THE MECHANICAL BEHAVIOR OF BIOMEDICAL
@@ -2608,7 +2502,6 @@ DVC: Achievements and Challenges                                                
  46. E. Dall’Ara, D. Barber, and M. Viceconti. About the inevitable compromise between spatial resolution and
      accuracy of strain measurement for bone tissue: A 3D zero-strain study. JOURNAL OF BIOMECHANICS,
      47(12):2956–2963, 2014.
-DVC: Achievements and Challenges                                                                             109
  47. V. Danesi, G. Tozzi, and L. Cristofolini. Application of digital volume correlation to study the efficacy of
      prophylactic vertebral augmentation. CLINICAL BIOMECHANICS, 39:14–24, 2016.
  48. G.R. Davis and J.C. Elliot. Artefacts in x-ray microtomography of materials. MATERIALS SCIENCE
@@ -2639,7 +2532,6 @@ DVC: Achievements and Challenges                                                
      Netherlands), 1996.
  59. R. Fedele, A. Ciani, and F. Fiori. X-ray microtomography under loading and 3D-volume digital image
      correlation. A review. FUNDAMENTA INFORMATICAE, 135(1-2):171–197, 2014.
-110                                                                                              A. Buljac et al.
  60. R. Fedele, A. Ciani, L. Galantucci, M. Bettuzzi, and L. Andena. A regularized, pyramidal multi-grid ap-
      proach to global 3D-volume digital image correlation based on X-ray micro-tomography. FUNDAMENTA
      INFORMATICAE, 125(3-4):361–376, 2013.
@@ -2674,7 +2566,6 @@ DVC: Achievements and Challenges                                                
  69. F. Forsberg and C.R. Siviour. 3D deformation and strain analysis in compacted sugar using x-ray mi-
      crotomography and digital volume correlation.      MEASUREMENT SCIENCE AND TECHNOLOGY,
      20(9):095703, 2009.
-DVC: Achievements and Challenges                                                                             111
  70. F. Forsberg, M. Sjodahl, R. Mooser, E. Hack, and P. Wyss. Full Three-Dimensional Strain Measurements
      on Wood Exposed to Three-Point Bending: Analysis by Use of Digital Volume Correlation Applied to
      Synchrotron Radiation Micro-Computed Tomography Image Data. STRAIN, 46(1):47–60, 2010.
@@ -2706,7 +2597,6 @@ DVC: Achievements and Challenges                                                
      ALS, 29:480–499, 2014.
  80. L.A. Gomes Perini, J.-C. Passieux, and J.-N. Périé. A Multigrid PGD-based Algorithm for Volumetric
      Displacement Fields Measurements. STRAIN, 50(4):355–367, 2014.
-112                                                                                                 A. Buljac et al.
  81. S. Gondrom and S. Schropfer. Digital computed laminography and tomosynthesis — functional principles
      and industrial applications. JOURNAL OF NONDESTRUCTIVE TESTING & ULTRASONICS, 7(2),
      1999.
@@ -2738,7 +2628,6 @@ DVC: Achievements and Challenges                                                
      8(05):C05006, 2013.
  91. G.T. Herman. Correction for beam hardening in computed tomography. PHYSICS IN MEDICINE AND
      BIOLOGY, 24(1):81, 1979.
-DVC: Achievements and Challenges                                                                              113
  92. G.T. Herman and R. Davidi. Image reconstruction from a small number of projections. INVERSE PROB-
      LEMS, 24(045011), 2008.
  93. F. Hild, A. Bouterf, L. Chamoin, F. Mathieu, J. Neggers, F. Pled, Z. Tomičević, and S. Roux. Toward
@@ -2771,7 +2660,6 @@ DVC: Achievements and Challenges                                                
 104. Z. Hu, H. Luo, S.G. Bardenhagen, C.R. Siviour, R.W. Armstrong, and H. Lu. Internal Deformation Mea-
      surement of Polymer Bonded Sugar in Compression by Digital Volume Correlation of In-situ Tomography.
      EXPERIMENTAL MECHANICS, 55(1):289–300, 2015.
-114                                                                                               A. Buljac et al.
 105. J. Huang, X. Pan, S. Li, X. Peng, C. Xiong, and J. Fang. A digital volume correlation technique for 3-D
      deformation measurements of soft gels. INTERNATIONAL JOURNAL OF APPLIED MECHANICS,
      3(2):335–354, 2011.
@@ -2804,7 +2692,6 @@ DVC: Achievements and Challenges                                                
 116. M. Kobayashi, H. Toda, Y. Kawai, T. Ohgaki, K. Uesugi, D.S. Wilkinson, T. Kobayashi, Y. Aoki, and
      M. Nakazawa. High-density three-dimensional mapping of internal strain by tracking microstructural
      features. ACTA MATERIALIA, 56(10):2167–2181, 2008.
-DVC: Achievements and Challenges                                                                                115
 117. K. Krupa and M. Bekiesińska-Figatowska. Artifacts in magnetic resonance imaging. POLISH JOURNAL
      OF RADIOLOGY, 80:93, 2015.
 118. S. Kullback. Information theory and statistics. John Wiley and Sons, New-York (USA), 1959.
@@ -2836,7 +2723,6 @@ DVC: Achievements and Challenges                                                
 130. K.Y. Lim, J.T. Henderson, and C.P. Neu. Cell and tissue deformation measurements: Texture correlation
      with third-order approximation of displacement gradients. JOURNAL OF BIOMECHANICS, 46(14):2490–
      2496, 2013.
-116                                                                                                  A. Buljac et al.
 131. N. Limodin, J. Réthoré, J. Adrien, J.-Y. Buffière, F. Hild, and S. Roux. Analysis and Artifact Correc-
      tion for Volume Correlation Measurements Using Tomographic Images from a Laboratory X-ray Source.
      EXPERIMENTAL MECHANICS, 51(6):959–970, 2011.
@@ -2868,7 +2754,6 @@ DVC: Achievements and Challenges                                                
      3(8):539–546, 2001.
 143. E. Maire, C. Le Bourlot, J. Adrien, A. Mortensen, and R. Mokso. 20-Hz X-ray tomography during an in
      situ tensile test. INTERNATIONAL JOURNAL OF FRACTURE, 200(1):3–12, 2016.
-DVC: Achievements and Challenges                                                                            117
 144. E. Maire and P. J. Withers. Quantitative X-ray tomography. INTERNATIONAL MATERIALS RE-
      VIEWS, 59(1):1–43, 2014.
 145. M. Makitalo and A. Foi. Optimal inversion of the generalized anscombe transformation for poisson-gaussian
@@ -2901,7 +2786,6 @@ DVC: Achievements and Challenges                                                
 156. T.F. Morgeneyer, L. Helfen, H. Mubarak, and F. Hild. 3D Digital Volume Correlation of Synchrotron Ra-
      diation Laminography Images of Ductile Crack Initiation: An Initial Feasibility Study. EXPERIMENTAL
      MECHANICS, 53(4):543–556, 2013.
-118                                                                                             A. Buljac et al.
 157. T.F. Morgeneyer, T. Taillandier-Thomas, A. Buljac, L. Helfen, and F. Hild. On strain and damage interac-
      tions during tearing: 3D in situ measurements and simulations for a ductile alloy (AA2139-T3). JOURNAL
      OF THE MECHANICS AND PHYSICS OF SOLIDS, 96:550–571, 2016.
@@ -2933,7 +2817,6 @@ DVC: Achievements and Challenges                                                
      95:320–350, 2016.
 167. R.A. Novelline. Squire’s Fundamentals of Radiology. Harvard University Press, Cambridge, MA (USA),
      2018.
-DVC: Achievements and Challenges                                                                               119
 168. M. Palanca, L. Cristofolini, E. Dall’Ara, M. Curto, F. Innocente, V. Danesi, and G. Tozzi. Digital volume
      correlation can be used to estimate local strains in natural and augmented vertebrae: An organ-level study.
      JOURNAL OF BIOMECHANICS, 49(16):3882–3890, 2016.
@@ -2966,7 +2849,6 @@ DVC: Achievements and Challenges                                                
      and digital volume correlation. JOURNAL OF POWER SOURCES, 320:196–203, 2016.
 179. R. Penrose. On best approximate solutions of linear matrix equations. MATHEMATICAL PROCEED-
      INGS OF THE CAMBRIDGE PHILOSOPHICAL SOCIETY, 52(1):17–19, 1956.
-120                                                                                               A. Buljac et al.
 180. M. Petersilka, H. Bruder, Bernhard Krauss, Karl Stierstorfer, and Thomas G Flohr. Technical principles
      of dual source CT. EUROPEAN JOURNAL OF RADIOLOGY, 68(3):362–368, 2008.
 181. F. Pierron, S.A. McDonald, D. Hollis, J. Fu, P.J. Withers, and A. Alderson. Comparison of the Me-
@@ -2999,7 +2881,6 @@ DVC: Achievements and Challenges                                                
      306, 2009.
 191. J. Réthoré, S. Roux, and F. Hild. Optimal and noise-robust extraction of fracture mechanics parameters
      from kinematic measurements. ENGINERRING FRACTURE MECHANICS, 78(9):1827–1845, 2011.
-DVC: Achievements and Challenges                                                                             121
 192. J. Réthoré, J.-P. Tinnes, S. Roux, J.-Y. Buffière, and F. Hild. Extended three-dimensional digital image
      correlation (x3d-dic). COMPTES RENDUS MÉCANIQUE, 336:643–649, 2008.
 193. B.C. Roberts, E. Perilli, and K.J. Reynolds. Application of the digital volume correlation technique for
@@ -3032,7 +2913,6 @@ DVC: Achievements and Challenges                                                
 202. L. Saucedo-Mora, C. Zou, T. Lowe, and T.J. Marrow. Three-dimensional measurement and cohesive element
      modelling of deformation and damage in a 2.5-dimensional woven ceramic matrix composite. FATIGUE
      & FRACTURE OF ENGINEERING MATERIALS & STRUCTURES, 40(5):683–695, 2017.
-122                                                                                            A. Buljac et al.
 203. F. Scarano. Tomographic PIV: principles and practice. MEASUREMENT SCIENCE AND TECHNOL-
      OGY, 24(1):012001, 2013.
 204. J. Schneider, H. Leclerc, F. Hild, and S. Roux.       Procédé de caractérisation d’une pièce.    Patent,
@@ -3065,7 +2945,6 @@ DVC: Achievements and Challenges                                                
 216. H. Toda, E. Maire, Y. Aoki, and M. Kobayashi. Three-dimensional strain mapping using in situ X-ray
      synchrotron microtomography. JOURNAL OF STRAIN ANALYSIS FOR ENGINEERING DESIGN,
      46(7):549–561, 2011.
-DVC: Achievements and Challenges                                                                             123
 217. H. Toda, I. Sinclair, J.-Y. Buffière, E. Maire, K.H. Khor, P. Gregson, and T. Kobayashi. A 3d measure-
      ment procedure for internal local crack driving forces via synchrotron x-ray microtomography. ACTA
      MATERIALIA, 52:1305–1317, 2004.
@@ -3097,7 +2976,6 @@ DVC: Achievements and Challenges                                                
      IEEE ENGINEERING IN MEDICINE AND BIOLOGY MAGAZINE, 12(1):26–39, 1993.
 229. G. Van Gompel, K. Van Slambrouck, M. Defrise, K. J. Batenburg, J. de Mey, J. Sijbers, and J. Nuyts.
      Iterative correction of beam hardening artifacts in CT. MEDICAL PHYSICS, 38(S1):S36–S49, 2011.
-124                                                                                             A. Buljac et al.
 230. E. Verhulp, B. van Rietbergen, and R. Huiskes. A three-dimensional digital image correlation technique
      for strain measurements in microstructures. JOURNAL OF BIOMECHANICS, 37(9):1313–1320, 2004.
 231. Y. Vertyagina, M. Mostafavi, C. Reinhard, R. Atwood, and T.J. Marrow. In situ quantitative three-
@@ -3129,8 +3007,7 @@ DVC: Achievements and Challenges                                                
      ENGINEERING-TRANSACTIONS OF THE ASME, 135(5):54505, 2013.
 242. R. Zauel, Y.N. Yeni, B.K. Bay, X.N. Dong, and D.P. Fyhrie. Comparison of the linear finite element predic-
      tion of deformation and strain of human cancellous bone to 3D digital volume correlation measurements.
-           DVC: Achievements and Challenges                                                                          125
-                       JOURNAL OF BIOMECHANICAL ENGINEERING-TRANSACTIONS OF THE ASME, 128(1):1–6,
+                                  JOURNAL OF BIOMECHANICAL ENGINEERING-TRANSACTIONS OF THE ASME, 128(1):1–6,
                        2006.
            243. M.-L. Zhu, Q.-H. Zhang, C. Lupton, and J. Tong. Spatial resolution and measurement uncertainty of strains
                        in bone and bone-cement interface using digital volume correlation. JOURNAL OF THE MECHANICAL
