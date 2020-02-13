@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from base import Load, Parser, Translator, Export, Proxy
+from base import Load, Parser, Translator, Export, Proxy, Color
 import argparse
 options_parser = argparse.ArgumentParser("AutoTrans")
 options_parser.add_argument(
@@ -33,18 +33,6 @@ trans = {
 translator = trans[translator]
 
 
-def colored(content, color_item):
-    '''print with color'''
-    tag = {
-            'red': '\033[1;31;40m',
-            'green': '\033[1;32;40m',
-            'blue': '\033[1;36;40m',
-            'fuchsia': '\033[1;35;40m',
-            'end': '\033[0m',
-          }
-    return tag[color_item]+content+tag['end']
-
-
 def translate(sentence):
     result = []
     for line in sentence:
@@ -54,13 +42,13 @@ def translate(sentence):
 
 if __name__ == '__main__':
     proxies = Proxy.proxy.run(is_proxy)
-    print(colored(":: Translating ...", 'red'))
+    Color.colored(":: Translating ...", 'red')
     for filename in filenames:
-        print(colored("\t\u2192 Load %s ..." % filename, 'fuchsia'))
+        Color.colored("\t\u2192 Load %s ..." % filename, 'pink')
         sentence = Load.read.txt(filename)
-        print(colored("\t=> Parsering and getting body ...", 'green'))
+        Color.colored("\t=> Parsering and getting body ...", 'green')
         body = Parser.parser(sentence)
-        print(colored("\t=> Translating ...", 'green'))
+        Color.colored("\t=> Translating ...", 'green')
         translation = translate(body)
-        print(colored("\t=> Export into %s.md ..." % filename.split(".")[0], 'green'))
+        Color.colored("\t=> Export into %s.md ..." % filename.split(".")[0], 'green')
         Export.markdown(translation, filename)
