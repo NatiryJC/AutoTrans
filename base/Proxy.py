@@ -46,7 +46,7 @@ class proxy():
         for page in range(1, 2):
             proxies += proxy.online(page)
         for i in range(0, len(proxies)):
-            print("\r(%d/%d)" % (i, len(proxies)), end="")
+            print("\r"+" "*60+"\r\t  ( %d/%d )" % (i, len(proxies)), end="")
             if proxy.fetch(proxy.merge(proxies[i])):
                 print("\tavailable", end="")
                 results += str(proxies[i])+"\n"
@@ -56,32 +56,42 @@ class proxy():
             f.write(results)
 
     def local():
+        result = None
         with open(".proxy", "r") as f:
             proxies = f.read().splitlines()
-        for i in range(0, len(proxies)):
-            print("\rTry # %d:" % i, end="")
-            if proxy.fetch(proxy.merge(proxies[i])):
-                print("\tavailable", end="")
-                return proxies[i]
-            else:
-                print("\tunavailable", end="")
-
-    def run(is_proxy):
-        if is_proxy:
-            print(":: Try to get proxy ...")
-            proxies = proxy.local()
-            print()
-            if proxies is None:
-                flag = input(":: Start Update Proxy [Y/n]")
-                if flag == 'n':
-                    print(":: No proxy")
-                    proxies = None
+            for i in range(0, len(proxies)):
+                print("\r"+" "*60, end="")
+                print("\r"+" "*60+"\r\t  Try # %d:" % (i+1), end="")
+                if proxy.fetch(proxy.merge(proxies[i])):
+                    result = proxies[i]
+                    print("\tavailable", end="")
+                    break
                 else:
-                    proxy.update()
-                    print(":: Try to get proxy again ...")
-                    proxies = proxy.local()
-                    print()
-        else:
-            print(":: No proxy")
-            proxies = None
+                    print("\tunavailable", end="")
+        return result
+
+    def run():
+        print("\t\u2192 Try proxy ...")
+        proxies = proxy.local()
+        print("\r"+" "*60, end="")
+        if proxies is None:
+            flag = input("\r\t\u2192 Failed. Update Proxy? [Y/n] ")
+            if flag == 'n':
+                print("\r"+" "*60, end="")
+                print("\r\t\u2192 No proxy")
+                proxies = None
+            else:
+                proxy.update()
+                print("\r"+" "*60, end="")
+                print("\r\t\u2192 Try Proxy again ...")
+                proxies = proxy.local()
+                print("\r"+" "*60, end="")
+                if proxies is None:
+                    print("\r"+" "*60, end="")
+                    flag = input(
+                       "\r\t\u2192 Failed twice. Continue without proxy [Y/n] "
+                       )
+                    proxies = None
+                    if flag == "n":
+                        exit(1)
         return proxies
