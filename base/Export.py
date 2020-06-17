@@ -2,11 +2,11 @@
 import re
 
 # For Body
-title_1 = re.compile(r"^\d\s(.*)")
-title_2 = re.compile(r"^\d\.\d\s(.*)")
-title_3 = re.compile(r"^\d\.\d\.\d\s(.*)")
-title_4 = re.compile(r"^\d\.\d\.\d\.\d\s(.*)")
-title_5 = re.compile(r"^\d\.\d\.\d\.\d\.\d\s(.*)")
+title_1 = re.compile(r"^\d\.*\s(.*)")
+title_2 = re.compile(r"^\d\.\d\.*\s(.*)")
+title_3 = re.compile(r"^\d\.\d\.\d\.*\s(.*)")
+title_4 = re.compile(r"^\d\.\d\.\d\.\d\.*\s(.*)")
+title_5 = re.compile(r"^\d\.\d\.\d\.\d\.\d\.*\s(.*)")
 para_start = re.compile(r"^\s\s.*")
 
 

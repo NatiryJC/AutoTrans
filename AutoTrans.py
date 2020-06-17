@@ -17,7 +17,7 @@ options_parser.add_argument(
 options_parser.add_argument(
         '-t', '--translator',
         required=False,
-        default='google',
+        default='local',
         help='Specify the Translator(local, youdao, baidu or google)'
         )
 options = options_parser.parse_args()

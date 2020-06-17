@@ -9,15 +9,15 @@ black_line = re.compile(r"^\s*$")
 abstract_start = re.compile(r"^Abstract")
 foreword_start = re.compile(r"^Foreword")
 contents_start = re.compile(r"^Contents")
-body_start = re.compile(r"^\d\s.*\D$")
+body_start = re.compile(r"^\d\.*\s.*\D$")
 references_start = re.compile(r"^References")
 
 # For Body
-title_1 = re.compile(r"^\d\s.*")
-title_2 = re.compile(r"^\d\.\d\s.*")
-title_3 = re.compile(r"^\d\.\d\.\d\s.*")
-title_4 = re.compile(r"^\d\.\d\.\d\.\d\s.*")
-title_5 = re.compile(r"^\d\.\d\.\d\.\d\.\d\s.*")
+title_1 = re.compile(r"^\d\.*\s.*")
+title_2 = re.compile(r"^\d\.\d\.*\s.*")
+title_3 = re.compile(r"^\d\.\d\.\d\.*\s.*")
+title_4 = re.compile(r"^\d\.\d\.\d\.\d\.*\s.*")
+title_5 = re.compile(r"^\d\.\d\.\d\.\d\.\d\.*\s.*")
 para_start = re.compile(r"^\s\s.*")
 
 # For References
