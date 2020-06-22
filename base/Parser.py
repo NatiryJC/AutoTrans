@@ -147,10 +147,17 @@ def parser(sentence):
                 body.append(title_5_flag)
                 continue
             if para_start_flag is not None:
-                body.append(line+" ")
+                if line[-1]=="-":
+                    body.append(line[:-1])
+                else:
+                    body.append(line+" ")
                 continue
             else:
-                body[-1] += line+" "
+                if line != "":
+                    if line[-1]=="-":
+                        body[-1] += line[:-1]
+                    else:
+                        body[-1] += line+" "
         return body
 
     abstract, foreword, contents, body, references = split(sentence)

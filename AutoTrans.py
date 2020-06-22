@@ -17,7 +17,7 @@ options_parser.add_argument(
 options_parser.add_argument(
         '-t', '--translator',
         required=False,
-        default='local',
+        default='google',
         help='Specify the Translator(local, youdao, baidu or google)'
         )
 options = options_parser.parse_args()
@@ -47,7 +47,8 @@ def translate(sentence):
     Length = 60
     for item in range(0, total):
         line = sentence[item]
-        result.append(line+" "+translator(line))
+        result.append("original:"+line)
+        result.append("translate:"+translator(line))
         Progress(total, item, Length)
     print("\r\t   "+" "*Length+"\r", end="")
     return result
